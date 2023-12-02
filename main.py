@@ -28,7 +28,7 @@ def userform():
     data = request.form
     user_id = data.get('user_id')
     channel_id = data.get("channel_id")
-    print(user_id)
+    print(data)
     client.chat_postEphemeral(channel=channel_id, user=user_id, text="Testing", blocks=USER_PORTAL)
     return Response(), 200
 
