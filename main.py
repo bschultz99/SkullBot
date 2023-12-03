@@ -5,6 +5,7 @@ from templates import *
 import slack
 import ssl
 import requests
+import json
 
 app = Flask(__name__)
 ssl_context = ssl.create_default_context()
@@ -31,6 +32,16 @@ def userform():
     user_name = client.users_info(user=user_id)['user']['real_name']
     client.chat_postEphemeral(channel=channel_id, user=user_id, text="Testing", blocks=user_portal(user_name))
     return Response(), 200
+
+
+
+@app.route('/interactions', methods=['POST'])
+def interactions():
+    data = json.loads(request.form.get("payload"))
+    action = data["actions"][0]["action_id"]
+    if action == "update_user_profile":
+        print('Hi')
+        print(data)
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=os.getenv("PORT", default=5000))
