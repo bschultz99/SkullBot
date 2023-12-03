@@ -1,5 +1,6 @@
 """Templates used for the slack messages"""
-USER_PORTAL = [
+def user_portal(user_name):
+    block = [
 		{
 			"type": "divider"
 		},
@@ -7,7 +8,7 @@ USER_PORTAL = [
 			"type": "section",
 			"text": {
 				"type": "mrkdwn",
-				"text": "Hello, {}:"
+				"text": f"Hello, {user_name}:"
 			}
 		},
 		{
@@ -70,6 +71,7 @@ USER_PORTAL = [
 			]
 		}
 	]
+    return block
 HELP_MESSAGE = """Welcome to the ThetaBot. These are the following features:
 1. /help - Gives information on how the slack commands work.
 2. /user-form - Fill this out to update your name, membership, and takedown availability.

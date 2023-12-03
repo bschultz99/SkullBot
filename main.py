@@ -29,7 +29,7 @@ def userform():
     user_id = data.get('user_id')
     channel_id = data.get("channel_id")
     user_name = client.users_info(user=user_id)['user']['real_name']
-    client.chat_postEphemeral(channel=channel_id, user=user_id, text="Testing", blocks=USER_PORTAL.format(user_name))
+    client.chat_postEphemeral(channel=channel_id, user=user_id, text="Testing", blocks=user_portal(user_name))
     return Response(), 200
 
 if __name__ == '__main__':
