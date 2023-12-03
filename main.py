@@ -42,8 +42,7 @@ def interactions():
     channel_id = data["container"]["channel_id"]
     action = data["actions"][0]["action_id"]
     if action == "update_user_profile":
-        print(data)
-        reponse_url = data["state"]["response_url"]
+        reponse_url = data["response_url"]
         client.chat_postEphemeral(reponse_url=reponse_url, channel=channel_id, user=user_id, blocks=USER_FORM)
     return Response(), 200
 
