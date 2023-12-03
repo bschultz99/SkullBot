@@ -38,13 +38,12 @@ def userform():
 @app.route('/interactions', methods=['POST'])
 def interactions():
     data = json.loads(request.form.get("payload"))
-    print(data["user"]["id"])
-    print(data["container"]["channel_id"])
+    user_id = data["user"]["id"]
+    channel_id = data["container"]["channel_id"]
     action = data["actions"][0]["action_id"]
     if action == "update_user_profile":
-        reponse_url = data["state"][reponse_url]
-        print(reponse_url)
-        #client.chat_postEphemeral(reponse_url=reponse_url, blocks=USER_FORM)
+        reponse_url = data["state"]["reponse_url"]
+        client.chat_postEphemeral(reponse_url=reponse_url, channel=channel_id, user=user_id blocks=USER_FORM)
     return Response(), 200
 
 if __name__ == '__main__':
