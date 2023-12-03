@@ -40,7 +40,7 @@ def interactions():
     data = json.loads(request.form.get("payload"))
     action = data["actions"][0]["action_id"]
     if action == "update_user_profile":
-        reponse_url = data["state"][0][reponse_url]
+        reponse_url = data["state"] #[0][reponse_url]
         client.chat_postEphemeral(reponse_url=reponse_url, blocks=USER_FORM)
         print(data)
     return Response(), 200
