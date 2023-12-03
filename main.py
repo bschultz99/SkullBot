@@ -42,6 +42,7 @@ def interactions():
     if action == "update_user_profile":
         print('Hi')
         print(data)
+    return Response(), 200
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=os.getenv("PORT", default=5000))
