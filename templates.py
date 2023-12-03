@@ -7,7 +7,7 @@ USER_PORTAL = [
 			"type": "section",
 			"text": {
 				"type": "mrkdwn",
-				"text": "Hello, INSER_NAME_HERE,"
+				"text": "Hello, {}:"
 			}
 		},
 		{
