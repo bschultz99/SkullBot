@@ -6,6 +6,7 @@ import slack
 import ssl
 import requests
 import json
+import psycopg2
 
 app = Flask(__name__)
 ssl_context = ssl.create_default_context()
@@ -33,6 +34,15 @@ def userform():
     client.chat_postEphemeral(channel=channel_id, user=user_id, text="Testing", blocks=user_portal(user_name))
     return Response(), 200
 
+@app.route('/adminform', methods=['POST'])
+def userform():
+    """Adminform Slack Command"""
+    data = request.form
+    user_id = data.get('user_id')
+    channel_id = data.get("channel_id")
+    user_name = client.users_info(user=user_id)['user']['real_name']
+    client.chat_postEphemeral(channel=channel_id, user=user_id, text="Testing", blocks=admin_portal(user_name))
+    return Response(), 200
 
 
 @app.route('/interactions', methods=['POST'])
@@ -40,11 +50,16 @@ def interactions():
     data = json.loads(request.form.get("payload"))
     user_id = data["user"]["id"]
     channel_id = data["container"]["channel_id"]
+    reponse_url = data["response_url"]
     action = data["actions"][0]["action_id"]
     if action == "update_user_profile":
-        reponse_url = data["response_url"]
         client.chat_postEphemeral(reponse_url=reponse_url, channel=channel_id, user=user_id, blocks=USER_FORM)
     return Response(), 200
 
 if __name__ == '__main__':
+    conn = psycopg2.connect(database=os.getenv("PGDATABASE"),
+                        host=os.getenv("PGHOST"),
+                        user=os.getenv("PGUSER"),
+                        password=os.getenv("PGPASSWORD"),
+                        port=os.getenv("PGPORT"))
     app.run(debug=True, host='0.0.0.0', port=os.getenv("PORT", default=5000))
