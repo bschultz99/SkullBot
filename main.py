@@ -57,10 +57,10 @@ def interactions():
     return Response(), 200
 
 if __name__ == '__main__':
-    conn = psycopg2.connect(database=os.getenv("postgress.DATABASE_PRIVATE_URL"),
-                        host=os.getenv("postgress.PGHOST"),
-                        user=os.getenv("postgress.PGUSER"),
-                        password=os.getenv("postgress.PGPASSWORD"),
-                        port=os.getenv("postgress.PGPORT"))
+    #conn = psycopg2.connect(database=os.getenv("DATABASE_PRIVATE_URL"),
+    #                    host=os.getenv("PGHOST"),
+    #                    user=os.getenv("PGUSER"),
+    #                    password=os.getenv("PGPASSWORD"),
+    #                    port=os.getenv("PGPORT"))
     print(os.environ)
     app.run(debug=True, host='0.0.0.0', port=os.getenv("PORT", default=5000))
