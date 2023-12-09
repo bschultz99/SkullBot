@@ -62,4 +62,5 @@ if __name__ == '__main__':
     #                    user=os.getenv("PGUSER"),
     #                    password=os.getenv("PGPASSWORD"),
     #                    port=os.getenv("PGPORT"))
+    print(os.environ)
     app.run(debug=True, host='0.0.0.0', port=os.getenv("PORT", default=5000))
