@@ -35,7 +35,7 @@ def userform():
     return Response(), 200
 
 @app.route('/adminform', methods=['POST'])
-def userform():
+def adminform():
     """Adminform Slack Command"""
     data = request.form
     user_id = data.get('user_id')
