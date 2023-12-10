@@ -57,7 +57,7 @@ def interactions():
     return Response(), 200
 
 if __name__ == '__main__':
-    conn = psycopg2.connect(database=os.getenv("DATABASE_PRIVATE_URL"),
+    conn = psycopg2.connect(database=os.getenv("PGDATABASE"),
                         host=os.getenv("PGHOST"),
                         user=os.getenv("POSTGRES_USER"),
                         password=os.getenv("POSTGRES_PASSWORD"),
