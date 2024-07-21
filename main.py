@@ -10,7 +10,7 @@ ssl_context = ssl.create_default_context()
 ssl_context.check_hostname = False
 ssl_context.verify_mode = ssl.CERT_NONE
 slack_event_adapter = SlackEventAdapter(os.getenv('SLACK_SIGNING_SECRET'),'/slack/events', app)
-#client = slack.WebClient(token=os.environ['SLACK_BOT_TOKEN'], ssl=ssl_context)
+client = slack.WebClient(token=os.getenv('SLACK_BOT_TOKEN'), ssl=ssl_context)
 
 if __name__ == '__main__':
     #conn = psycopg2.connect(database=os.getenv("PGDATABASE"),
