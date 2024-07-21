@@ -17,6 +17,15 @@ THIS IS A TEST!
 '''
 
 
+USER_TABLE = """
+CREATE TABLE IF NOT EXISTS users (
+    slack_id VARCHAR(255),
+    name VARCHAR(255),
+    membership VARCHAR(255)
+    );
+"""
+
+
 @app.route('/help', methods=['POST'])
 def helpform():
     """Help Slack Command"""
@@ -34,7 +43,7 @@ if __name__ == '__main__':
                         password=os.getenv("POSTGRES_PASSWORD"),
                         port=os.getenv("PGPORT"))
     cursor = conn.cursor()
-    cursor.execute("DROP TABLE IF EXISTS users;")
+    cursor.execute(USER_TABLE)
     conn.commit()
     #print(cursor.fetchall())
     app.run(debug=True, host='0.0.0.0', port=os.getenv("PORT", default=8080))
