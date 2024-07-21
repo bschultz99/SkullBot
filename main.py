@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, request, Response
 import os
 from slackeventsapi import SlackEventAdapter
 import slack
@@ -12,6 +12,21 @@ ssl_context.verify_mode = ssl.CERT_NONE
 slack_event_adapter = SlackEventAdapter(os.getenv('SLACK_SIGNING_SECRET'),'/slack/events', app)
 client = slack.WebClient(token=os.getenv('SLACK_BOT_TOKEN'), ssl=ssl_context)
 
+HELP_MESSAGE= '''
+THIS IS A TEST!
+'''
+
+
+@app.route('/help', methods=['POST'])
+def helpform():
+    """Help Slack Command"""
+    data = request.form
+    user_id = data.get('user_id')
+    channel_id = data.get("channel_id")
+    client.chat_postEphemeral(channel=channel_id, user=user_id, text=HELP_MESSAGE)
+    return Response(), 200
+
+
 if __name__ == '__main__':
     conn = psycopg2.connect(database=os.getenv("PGDATABASE"),
                         host=os.getenv("PGHOST"),
@@ -21,4 +36,4 @@ if __name__ == '__main__':
     cursor = conn.cursor()
     cursor.execute("SELECT * FROM users;")
     print(cursor.fetchall())
-    app.run(debug=True, host='0.0.0.0', port=os.getenv("PORT", default=5000))
+    app.run(debug=True, host='0.0.0.0', port=os.getenv("PORT", default=8080))
