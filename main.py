@@ -13,11 +13,11 @@ slack_event_adapter = SlackEventAdapter(os.getenv('SLACK_SIGNING_SECRET'),'/slac
 client = slack.WebClient(token=os.getenv('SLACK_BOT_TOKEN'), ssl=ssl_context)
 
 if __name__ == '__main__':
-    #conn = psycopg2.connect(database=os.getenv("PGDATABASE"),
-                        #host=os.getenv("PGHOST"),
-                        #user=os.getenv("POSTGRES_USER"),
-                        #password=os.getenv("POSTGRES_PASSWORD"),
-                        #port=os.getenv("PGPORT"))
+    conn = psycopg2.connect(database=os.getenv("PGDATABASE"),
+                        host=os.getenv("PGHOST"),
+                        user=os.getenv("POSTGRES_USER"),
+                        password=os.getenv("POSTGRES_PASSWORD"),
+                        port=os.getenv("PGPORT"))
     #cursor = conn.cursor()
     #cursor.execute("SELECT * FROM admin")
     #print(cursor.fetchall())
