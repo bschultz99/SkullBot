@@ -34,6 +34,6 @@ if __name__ == '__main__':
                         password=os.getenv("POSTGRES_PASSWORD"),
                         port=os.getenv("PGPORT"))
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM users;")
+    cursor.execute("ALTER TABLE users DROP COLUMN last_name;")
     print(cursor.fetchall())
     app.run(debug=True, host='0.0.0.0', port=os.getenv("PORT", default=8080))
