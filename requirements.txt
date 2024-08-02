@@ -3,3 +3,4 @@ Requests==2.31.0
 slackclient==2.9.4
 slackeventsapi==3.0.1
 psycopg2==2.9.9
+slackbolt

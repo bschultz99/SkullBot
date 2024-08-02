@@ -1,16 +1,18 @@
-from flask import Flask, request, Response
-import os
+from slack_bolt import App
+import os, logging, slack, ssl, psycopg2
 from slackeventsapi import SlackEventAdapter
-import slack
-import ssl
-import psycopg2
 
-app = Flask(__name__)
+logging.basicConfig(level=logging.DEBUG)
+
 ssl_context = ssl.create_default_context()
 ssl_context.check_hostname = False
 ssl_context.verify_mode = ssl.CERT_NONE
-slack_event_adapter = SlackEventAdapter(os.getenv('SLACK_SIGNING_SECRET'),'/slack/events', app)
-client = slack.WebClient(token=os.getenv('SLACK_BOT_TOKEN'), ssl=ssl_context)
+
+app = App(
+    token = slack.WebClient(token=os.getenv('SLACK_BOT_TOKEN'), ssl=ssl_context)
+    signing_secret = SlackEventAdapter(os.getenv('SLACK_SIGNING_SECRET'),'/slack/events', app)
+)
+
 
 HELP_MESSAGE= '''
 THIS IS A TEST!
@@ -19,6 +21,7 @@ THIS IS A TEST!
 VIEW = '''
 {
 	"type": "modal",
+    "callback_id": "view-modal",
 	"title": {
 		"type": "plain_text",
 		"text": "My App",
@@ -123,18 +126,29 @@ CREATE TABLE IF NOT EXISTS users (
     );
 """
 
+@app.middleware
+def log_request(logger, body, next):
+    logger.debug(body)
+    next()
 
-@app.route('/help', methods=['POST'])
-def helpform():
+
+@app.command('/help')
+def helpform(body, ack, client, logger):
     """Help Slack Command"""
-    data = request.form
-    user_id = data.get('user_id')
-    channel_id = data.get("channel_id")
-    trigger_id = data.get("trigger_id")
-    client.views_open(trigger_id=trigger_id, view=VIEW)
+    logger.info(body)
+    ack()
+    res = client.views_open(trigger_id=body["trigger_id"], view=VIEW)
     #client.chat_postEphemeral(channel=channel_id, user=user_id, text=HELP_MESSAGE)
-    return Response(), 200
+    logger.info(res)
 
+@app.view("view-modal")
+def view_submission(ack, body, client, logger):
+    ack()
+    logger.info(body["view"]["state"]["values"])
+    # Extra Credit: Uncomment out this section
+    # thank_you_channel = "your_channel_id"
+    # user_text = body["view"]["state"]["values"]["my_block"]["my_action"]["value"]
+    # client.chat_postMessage(channel=thank_you_channel, text=user_text)
 
 if __name__ == '__main__':
     conn = psycopg2.connect(database=os.getenv("PGDATABASE"),
