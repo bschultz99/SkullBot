@@ -9,8 +9,8 @@ ssl_context.check_hostname = False
 ssl_context.verify_mode = ssl.CERT_NONE
 
 app = App(
-    token = slack.WebClient(token=os.getenv('SLACK_BOT_TOKEN'), ssl=ssl_context)
-    signing_secret = SlackEventAdapter(os.getenv('SLACK_SIGNING_SECRET'),'/slack/events', app)
+    token = os.getenv('SLACK_BOT_TOKEN'),
+    signing_secret = os.getenv('SLACK_SIGNING_SECRET'),
 )
 
 
