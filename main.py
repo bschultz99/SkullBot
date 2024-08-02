@@ -160,4 +160,4 @@ if __name__ == '__main__':
     cursor.execute(USER_TABLE)
     conn.commit()
     #print(cursor.fetchall())
-    app.run(debug=True, host='0.0.0.0', port=os.getenv("PORT", default=8080))
+    app.start(port=os.getenv("PORT", default=8080))
