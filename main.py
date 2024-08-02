@@ -44,6 +44,7 @@ def user_portal(body, ack, client, logger):
 def view_submission(ack, body, client, logger):
     ack()
     #logger.info(body["view"]["state"]["values"])
+    print(body["view"]["state"]["values"])
     name = body["view"]["state"]["values"].get('value')
     print(name)
     # Extra Credit: Uncomment out this section
