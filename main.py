@@ -1,4 +1,5 @@
 from slack_bolt import App
+from modals import USER_PORTAL
 import os, logging, psycopg2
 
 logging.basicConfig(level=logging.DEBUG)
@@ -8,110 +9,6 @@ app = App(
     token = os.getenv('SLACK_BOT_TOKEN'),
     signing_secret = os.getenv('SLACK_SIGNING_SECRET'),
 )
-
-
-HELP_MESSAGE= '''
-THIS IS A TEST!
-'''
-
-VIEW = '''
-{
-	"type": "modal",
-    "callback_id": "view-modal",
-	"title": {
-		"type": "plain_text",
-		"text": "My App",
-		"emoji": true
-	},
-	"submit": {
-		"type": "plain_text",
-		"text": "Submit",
-		"emoji": true
-	},
-	"close": {
-		"type": "plain_text",
-		"text": "Cancel",
-		"emoji": true
-	},
-	"blocks": [
-		{
-			"type": "input",
-			"element": {
-				"type": "plain_text_input",
-			},
-			"label": {
-				"type": "plain_text",
-				"text": "Name",
-				"emoji": true
-			}
-		},
-		{
-			"type": "section",
-			"text": {
-				"type": "mrkdwn",
-				"text": "Section block with radio buttons"
-			},
-			"accessory": {
-				"type": "radio_buttons",
-				"options": [
-					{
-						"text": {
-							"type": "plain_text",
-							"text": "In-House 2",
-							"emoji": true
-						},
-						"value": "value-0"
-					},
-					{
-						"text": {
-							"type": "plain_text",
-							"text": "In-House 3",
-							"emoji": true
-						},
-						"value": "value-1"
-					},
-					{
-						"text": {
-							"type": "plain_text",
-							"text": "Townsman",
-							"emoji": true
-						},
-						"value": "value-2"
-					}
-				],
-				"action_id": "radio_buttons-action"
-			}
-		},
-		{
-			"type": "divider"
-		},
-		{
-			"type": "actions",
-			"elements": [
-				{
-					"type": "button",
-					"text": {
-						"type": "plain_text",
-						"text": "Submit"
-					},
-					"style": "primary",
-					"value": "click_me_123"
-				},
-				{
-					"type": "button",
-					"text": {
-						"type": "plain_text",
-						"text": "Cancel"
-					},
-					"style": "danger",
-					"value": "click_me_123"
-				}
-			]
-		}
-	]
-}
-'''
-
 
 USER_TABLE = """
 CREATE TABLE IF NOT EXISTS users (
@@ -132,10 +29,18 @@ def helpform(body, ack, client, logger):
     """Help Slack Command"""
     logger.info(body)
     ack()
-    res = client.views_open(trigger_id=body["trigger_id"], view=VIEW)
+    res = client.views_open(trigger_id=body["trigger_id"], view=USER_PORTAL)
     logger.info(res)
 
-@app.view("view-modal")
+@app.command("/user-portal")
+def user_portal(body, ack, client, logger):
+    """User Portal"""
+    logger.info(body)
+    ack()
+    res = client.views_open(trigger_id=body["trriger_id"], view=USER_PORTAL)
+    logger.info(res)
+
+@app.view("user-portal-modal")
 def view_submission(ack, body, client, logger):
     ack()
     logger.info(body["view"]["state"]["values"])
@@ -146,6 +51,19 @@ def view_submission(ack, body, client, logger):
 
 @app.action("radio_buttons-action")
 def buttons(ack, body, client, logger):
+    ack()
+
+
+@app.action("plain_text_input-action")
+def plain_text(ack):
+    ack()
+
+@app.action("static_select-action")
+def static_select(ack):
+    ack()
+
+@app.action("checkboxes-action")
+def checkbox(ack):
     ack()
 
 if __name__ == '__main__':
