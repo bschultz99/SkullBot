@@ -128,7 +128,7 @@ def log_request(logger, body, next):
     next()
 
 
-@app.command('/help')
+@app.command("/help")
 def helpform(body, ack, client, logger):
     """Help Slack Command"""
     logger.info(body)
@@ -155,4 +155,4 @@ if __name__ == '__main__':
     cursor.execute(USER_TABLE)
     conn.commit()
     #print(cursor.fetchall())
-    app.start(8080)
+    app.start(3000)
