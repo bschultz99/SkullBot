@@ -46,8 +46,12 @@ def view_submission(ack, body, client, logger):
     #logger.info(body["view"]["state"]["values"])
     data = body["view"]["state"]["values"]
     input_keys = list(data)
-    name = body["view"]["state"]["values"][input_keys[0]]["plain_text_input-action"]["value"]
+    try:
+        name = body["view"]["state"]["values"][input_keys[0]]["plain_text_input-action"]["value"]
+    except KeyError:
+        name = "im dumb" 
     print(f"Name: {name}")
+    print(data)
     # Extra Credit: Uncomment out this section
     # thank_you_channel = "your_channel_id"
     # user_text = body["view"]["state"]["values"]["my_block"]["my_action"]["value"]
