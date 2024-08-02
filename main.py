@@ -44,6 +44,7 @@ def user_portal(body, ack, client, logger):
 def view_submission(ack, body, client, logger):
     ack()
     logger.info(body["view"]["state"]["values"])
+    print(type(body["view"]["state"]["values"]))
     # Extra Credit: Uncomment out this section
     # thank_you_channel = "your_channel_id"
     # user_text = body["view"]["state"]["values"]["my_block"]["my_action"]["value"]
