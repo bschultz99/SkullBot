@@ -131,6 +131,7 @@ def log_request(logger, body, next):
 @app.command("/help")
 def helpform(body, ack, client, logger):
     """Help Slack Command"""
+    print("hi")
     logger.info(body)
     ack()
     res = client.views_open(trigger_id=body["trigger_id"], view=VIEW)
