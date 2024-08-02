@@ -49,9 +49,9 @@ def view_submission(ack, body, client, logger):
     try:
         name = body["view"]["state"]["values"][input_keys[0]]["plain_text_input-action"]["value"]
     except KeyError:
-        name = "im dumb" 
+        name = "ahh"#app.client.users_info(user=slack_id)['user']['real_name']
     print(f"Name: {name}")
-    print(data)
+    print(body["user"]["id"])
     # Extra Credit: Uncomment out this section
     # thank_you_channel = "your_channel_id"
     # user_text = body["view"]["state"]["values"]["my_block"]["my_action"]["value"]
