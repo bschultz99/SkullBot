@@ -131,8 +131,7 @@ def helpform():
     user_id = data.get('user_id')
     channel_id = data.get("channel_id")
     trigger_id = data.get("trigger_id")
-    print(trigger_id)
-    client.views_open(trigger_id, view=VIEW)
+    client.views_open(trigger_id=trigger_id, view=VIEW)
     #client.chat_postEphemeral(channel=channel_id, user=user_id, text=HELP_MESSAGE)
     return Response(), 200
 
