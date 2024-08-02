@@ -1,12 +1,8 @@
 from slack_bolt import App
-import os, logging, slack, ssl, psycopg2
-from slackeventsapi import SlackEventAdapter
+import os, logging, psycopg2
 
 logging.basicConfig(level=logging.DEBUG)
 
-ssl_context = ssl.create_default_context()
-ssl_context.check_hostname = False
-ssl_context.verify_mode = ssl.CERT_NONE
 
 app = App(
     token = os.getenv('SLACK_BOT_TOKEN'),
@@ -138,7 +134,6 @@ def helpform(body, ack, client, logger):
     logger.info(body)
     ack()
     res = client.views_open(trigger_id=body["trigger_id"], view=VIEW)
-    #client.chat_postEphemeral(channel=channel_id, user=user_id, text=HELP_MESSAGE)
     logger.info(res)
 
 @app.view("view-modal")
@@ -160,4 +155,4 @@ if __name__ == '__main__':
     cursor.execute(USER_TABLE)
     conn.commit()
     #print(cursor.fetchall())
-    app.start(port=os.getenv("PORT", default=8080))
+    app.start(8080)
