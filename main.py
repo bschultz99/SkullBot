@@ -17,7 +17,7 @@ THIS IS A TEST!
 VIEW = '''
 {
 	"type": "modal",
-    "callback_id": "view-modal",
+	"callback_id": "view-modal",
 	"title": {
 		"type": "plain_text",
 		"text": "My App",
@@ -37,8 +37,7 @@ VIEW = '''
 		{
 			"type": "input",
 			"element": {
-				"type": "plain_text_input",
-				"action_id": "plain_text_input-action"
+				"type": "plain_text_input"
 			},
 			"label": {
 				"type": "plain_text",
@@ -79,35 +78,8 @@ VIEW = '''
 						},
 						"value": "value-2"
 					}
-				],
-				"action_id": "radio_buttons-action"
+				]
 			}
-		},
-		{
-			"type": "divider"
-		},
-		{
-			"type": "actions",
-			"elements": [
-				{
-					"type": "button",
-					"text": {
-						"type": "plain_text",
-						"text": "Submit"
-					},
-					"style": "primary",
-					"value": "click_me_123"
-				},
-				{
-					"type": "button",
-					"text": {
-						"type": "plain_text",
-						"text": "Cancel"
-					},
-					"style": "danger",
-					"value": "click_me_123"
-				}
-			]
 		}
 	]
 }
