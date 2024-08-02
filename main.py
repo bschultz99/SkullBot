@@ -144,7 +144,7 @@ def view_submission(ack, body, client, logger):
     # user_text = body["view"]["state"]["values"]["my_block"]["my_action"]["value"]
     # client.chat_postMessage(channel=thank_you_channel, text=user_text)
 
-@app.view("radio_buttons-action")
+@app.action("radio_buttons-action")
 def buttons(ack, body, client, logger):
     ack()
 
