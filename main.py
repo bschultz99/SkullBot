@@ -37,7 +37,7 @@ def user_portal(body, ack, client, logger):
     """User Portal"""
     logger.info(body)
     ack()
-    res = client.views_open(trigger_id=body["trriger_id"], view=USER_PORTAL)
+    res = client.views_open(trigger_id=body["trigger_id"], view=USER_PORTAL)
     logger.info(res)
 
 @app.view("user-portal-modal")
