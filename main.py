@@ -46,12 +46,12 @@ def view_submission(ack, body, client, logger):
     #logger.info(body["view"]["state"]["values"])
     data = body["view"]["state"]["values"]
     input_keys = list(data)
+    slack_id = body["user"]["id"]
     try:
         name = body["view"]["state"]["values"][input_keys[0]]["plain_text_input-action"]["value"]
     except KeyError:
-        name = "ahh"#app.client.users_info(user=slack_id)['user']['real_name']
+        name = app.client.users_info(user=slack_id)['user']['real_name']
     print(f"Name: {name}")
-    print(body["user"]["id"])
     # Extra Credit: Uncomment out this section
     # thank_you_channel = "your_channel_id"
     # user_text = body["view"]["state"]["values"]["my_block"]["my_action"]["value"]
