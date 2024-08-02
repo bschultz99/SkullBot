@@ -43,11 +43,10 @@ def user_portal(body, ack, client, logger):
 @app.view("user-portal-modal")
 def view_submission(ack, body, client, logger):
     ack()
-    logger.info(body["view"]["state"]["values"])
+    #logger.info(body["view"]["state"]["values"])
     for values in body["view"]["state"]["values"].values():
         for key, value in values.items():
-            print(value)
-        print("----")
+            print(type(value))
     # Extra Credit: Uncomment out this section
     # thank_you_channel = "your_channel_id"
     # user_text = body["view"]["state"]["values"]["my_block"]["my_action"]["value"]
