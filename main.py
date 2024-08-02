@@ -16,6 +16,104 @@ HELP_MESSAGE= '''
 THIS IS A TEST!
 '''
 
+VIEW = '''
+{
+	"type": "modal",
+	"title": {
+		"type": "plain_text",
+		"text": "My App",
+		"emoji": true
+	},
+	"submit": {
+		"type": "plain_text",
+		"text": "Submit",
+		"emoji": true
+	},
+	"close": {
+		"type": "plain_text",
+		"text": "Cancel",
+		"emoji": true
+	},
+	"blocks": [
+		{
+			"type": "input",
+			"element": {
+				"type": "plain_text_input",
+				"action_id": "plain_text_input-action"
+			},
+			"label": {
+				"type": "plain_text",
+				"text": "Name",
+				"emoji": true
+			}
+		},
+		{
+			"type": "section",
+			"text": {
+				"type": "mrkdwn",
+				"text": "Section block with radio buttons"
+			},
+			"accessory": {
+				"type": "radio_buttons",
+				"options": [
+					{
+						"text": {
+							"type": "plain_text",
+							"text": "In-House 2",
+							"emoji": true
+						},
+						"value": "value-0"
+					},
+					{
+						"text": {
+							"type": "plain_text",
+							"text": "In-House 3",
+							"emoji": true
+						},
+						"value": "value-1"
+					},
+					{
+						"text": {
+							"type": "plain_text",
+							"text": "Townsman",
+							"emoji": true
+						},
+						"value": "value-2"
+					}
+				],
+				"action_id": "radio_buttons-action"
+			}
+		},
+		{
+			"type": "divider"
+		},
+		{
+			"type": "actions",
+			"elements": [
+				{
+					"type": "button",
+					"text": {
+						"type": "plain_text",
+						"text": "Submit"
+					},
+					"style": "primary",
+					"value": "click_me_123"
+				},
+				{
+					"type": "button",
+					"text": {
+						"type": "plain_text",
+						"text": "Cancel"
+					},
+					"style": "danger",
+					"value": "click_me_123"
+				}
+			]
+		}
+	]
+}
+'''
+
 
 USER_TABLE = """
 CREATE TABLE IF NOT EXISTS users (
@@ -32,7 +130,9 @@ def helpform():
     data = request.form
     user_id = data.get('user_id')
     channel_id = data.get("channel_id")
-    client.chat_postEphemeral(channel=channel_id, user=user_id, text=HELP_MESSAGE)
+    trigger_id = data.get("trigger_id")
+    client.views_open(trigger_id, view=VIEW)
+    #client.chat_postEphemeral(channel=channel_id, user=user_id, text=HELP_MESSAGE)
     return Response(), 200
 
 
