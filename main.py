@@ -17,7 +17,7 @@ THIS IS A TEST!
 VIEW = '''
 {
 	"type": "modal",
-	"callback_id": "view-modal",
+    "callback_id": "view-modal",
 	"title": {
 		"type": "plain_text",
 		"text": "My App",
@@ -37,7 +37,7 @@ VIEW = '''
 		{
 			"type": "input",
 			"element": {
-				"type": "plain_text_input"
+				"type": "plain_text_input",
 			},
 			"label": {
 				"type": "plain_text",
@@ -78,8 +78,35 @@ VIEW = '''
 						},
 						"value": "value-2"
 					}
-				]
+				],
+				"action_id": "radio_buttons-action"
 			}
+		},
+		{
+			"type": "divider"
+		},
+		{
+			"type": "actions",
+			"elements": [
+				{
+					"type": "button",
+					"text": {
+						"type": "plain_text",
+						"text": "Submit"
+					},
+					"style": "primary",
+					"value": "click_me_123"
+				},
+				{
+					"type": "button",
+					"text": {
+						"type": "plain_text",
+						"text": "Cancel"
+					},
+					"style": "danger",
+					"value": "click_me_123"
+				}
+			]
 		}
 	]
 }
@@ -116,6 +143,10 @@ def view_submission(ack, body, client, logger):
     # thank_you_channel = "your_channel_id"
     # user_text = body["view"]["state"]["values"]["my_block"]["my_action"]["value"]
     # client.chat_postMessage(channel=thank_you_channel, text=user_text)
+
+@app.view("radio_buttons-action")
+def buttons(ack, body, client, logger):
+    ack()
 
 if __name__ == '__main__':
     conn = psycopg2.connect(database=os.getenv("PGDATABASE"),
