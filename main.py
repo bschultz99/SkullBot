@@ -46,8 +46,7 @@ def view_submission(ack, body, client, logger):
     #logger.info(body["view"]["state"]["values"])
     data = body["view"]["state"]["values"]
     input_keys = list(data)
-    print(input_keys)
-    name = body["view"]["state"]["values"][input_keys[0]].get('value')
+    name = body["view"]["state"]["values"][input_keys[0]]
     print(name)
     # Extra Credit: Uncomment out this section
     # thank_you_channel = "your_channel_id"
