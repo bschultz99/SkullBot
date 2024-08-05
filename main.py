@@ -10,10 +10,10 @@ app = App(
     signing_secret = os.getenv('SLACK_SIGNING_SECRET'),
 )
 
-@app.middleware
-def log_request(logger, body, next):
-    logger.debug(body)
-    next()
+#@app.middleware
+#def log_request(logger, body, next):
+   # logger.debug(body)
+   # next()
 
 # Commands
 @app.command("/skull-help")
@@ -42,7 +42,7 @@ def view_submission(ack, body, client, logger):
     membership = body["view"]["state"]["values"][input_keys[1]]["null-action"]["value"]
     print(f"Name: {name}")
     print(f"Name: {membership}")
-    print(data)
+    #print(data)
 
 
 # Modal Reponse Ack
