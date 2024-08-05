@@ -88,37 +88,37 @@ USER_PORTAL = """
 					{
 						"text": {
 							"type": "plain_text",
-							"text": "Monday"
+							"text": "Monday Lunch"
 						},
-						"value": "M"
+						"value": "ML"
 					},
 					{
 						"text": {
 							"type": "plain_text",
-							"text": "Tuesday"
+							"text": "Tuesday Lunch"
 						},
-						"value": "T"
+						"value": "TL"
 					},
 					{
 						"text": {
 							"type": "plain_text",
-							"text": "Wednesday"
+							"text": "Wednesday Lunch"
 						},
-						"value": "W"
+						"value": "WL"
 					},
 					{
 						"text": {
 							"type": "plain_text",
-							"text": "Thursday"
+							"text": "Thursday Lunch"
 						},
-						"value": "TH"
+						"value": "HL"
 					},
 					{
 						"text": {
 							"type": "plain_text",
-							"text": "Friday"
+							"text": "Friday Lunch"
 						},
-						"value": "F"
+						"value": "FL"
 					}
 				],
 				"action_id": "null-action"
