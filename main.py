@@ -32,13 +32,17 @@ def user_portal(body, ack, client, logger):
     res = client.views_open(trigger_id=body["trigger_id"], view=USER_PORTAL)
     logger.info(res)
 
+# Modal View
 @app.view("user-portal-modal")
 def view_submission(ack, body, client, logger):
     ack()
     data = body["view"]["state"]["values"]
     input_keys = list(data)
     name = body["view"]["state"]["values"][input_keys[0]]["null-action"]["value"]
+    membership = body["view"]["state"]["values"][input_keys[1]]["null-action"]["value"]
     print(f"Name: {name}")
+    print(f"Name: {membership}")
+    print(data)
 
 
 # Modal Reponse Ack
@@ -48,10 +52,10 @@ def buttons(ack):
 
 if __name__ == '__main__':
     conn = psycopg2.connect(database=os.getenv("PGDATABASE"),
-                        host=os.getenv("PGHOST"),
-                        user=os.getenv("POSTGRES_USER"),
-                        password=os.getenv("POSTGRES_PASSWORD"),
-                        port=os.getenv("PGPORT"))
+                            host=os.getenv("PGHOST"),
+                            user=os.getenv("POSTGRES_USER"),
+                            password=os.getenv("POSTGRES_PASSWORD"),
+                            port=os.getenv("PGPORT"))
     cursor = conn.cursor()
     cursor.execute(USER_TABLE)
     conn.commit()
