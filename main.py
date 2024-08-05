@@ -37,7 +37,7 @@ def view_submission(ack, body, client, logger):
     ack()
     data = body["view"]["state"]["values"]
     input_keys = list(data)
-    name = body["view"]["state"]["values"][input_keys[0]]["plain_text_input-action"]["value"]
+    name = body["view"]["state"]["values"][input_keys[0]]["null-action"]["value"]
     print(f"Name: {name}")
 
 
