@@ -1,29 +1,21 @@
 from slack_bolt import App
 from modals import USER_PORTAL
+from database import USER_TABLE
 import os, logging, psycopg2
 
 logging.basicConfig(level=logging.DEBUG)
-
 
 app = App(
     token = os.getenv('SLACK_BOT_TOKEN'),
     signing_secret = os.getenv('SLACK_SIGNING_SECRET'),
 )
 
-USER_TABLE = """
-CREATE TABLE IF NOT EXISTS users (
-    slack_id VARCHAR(255),
-    name VARCHAR(255),
-    membership VARCHAR(255)
-    );
-"""
-
 @app.middleware
 def log_request(logger, body, next):
     logger.debug(body)
     next()
 
-
+# Commands
 @app.command("/skull-help")
 def helpform(body, ack, client, logger):
     """Help Slack Command"""
@@ -48,21 +40,10 @@ def view_submission(ack, body, client, logger):
     name = body["view"]["state"]["values"][input_keys[0]]["plain_text_input-action"]["value"]
     print(f"Name: {name}")
 
-@app.action("radio_buttons-action")
-def buttons(ack, body, client, logger):
-    ack()
 
-
-@app.action("plain_text_input-action")
-def plain_text(ack):
-    ack()
-
-@app.action("static_select-action")
-def static_select(ack):
-    ack()
-
-@app.action("checkboxes-action")
-def checkbox(ack):
+# Modal Reponse Ack
+@app.action("null-action")
+def buttons(ack):
     ack()
 
 if __name__ == '__main__':

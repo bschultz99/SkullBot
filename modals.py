@@ -28,7 +28,7 @@ USER_PORTAL = """
 			"type": "input",
 			"element": {
 				"type": "plain_text_input",
-				"action_id": "plain_text_input-action"
+				"action_id": "null-action"
 			},
 			"label": {
 				"type": "plain_text",
@@ -73,7 +73,7 @@ USER_PORTAL = """
 						"value": "value-NM"
 					}
 				],
-				"action_id": "static_select-action"
+				"action_id": "null-action"
 			},
 			"label": {
 				"type": "plain_text",
@@ -121,7 +121,7 @@ USER_PORTAL = """
 						"value": "value-F"
 					}
 				],
-				"action_id": "checkboxes-action"
+				"action_id": "null-action"
 			},
 			"label": {
 				"type": "plain_text",
