@@ -43,19 +43,10 @@ def user_portal(body, ack, client, logger):
 @app.view("user-portal-modal")
 def view_submission(ack, body, client, logger):
     ack()
-    #logger.info(body["view"]["state"]["values"])
     data = body["view"]["state"]["values"]
     input_keys = list(data)
-    slack_id = body["user"]["id"]
-    try:
-        name = body["view"]["state"]["values"][input_keys[0]]["plain_text_input-action"]["value"]
-    except KeyError:
-        name = app.client.users_info(user=slack_id)['user']['real_name']
+    name = body["view"]["state"]["values"][input_keys[0]]["plain_text_input-action"]["value"]
     print(f"Name: {name}")
-    # Extra Credit: Uncomment out this section
-    # thank_you_channel = "your_channel_id"
-    # user_text = body["view"]["state"]["values"]["my_block"]["my_action"]["value"]
-    # client.chat_postMessage(channel=thank_you_channel, text=user_text)
 
 @app.action("radio_buttons-action")
 def buttons(ack, body, client, logger):
