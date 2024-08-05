@@ -49,28 +49,28 @@ USER_PORTAL = """
 							"type": "plain_text",
 							"text": "In-House 2"
 						},
-						"value": "value-IH2"
+						"value": "IH2"
 					},
 					{
 						"text": {
 							"type": "plain_text",
 							"text": "In-House 3"
 						},
-						"value": "value-IH3"
+						"value": "IH3"
 					},
 					{
 						"text": {
 							"type": "plain_text",
 							"text": "Townsman"
 						},
-						"value": "value-TM"
+						"value": "TM"
 					},
 					{
 						"text": {
 							"type": "plain_text",
 							"text": "New Member"
 						},
-						"value": "value-NM"
+						"value": "NM"
 					}
 				],
 				"action_id": "null-action"
@@ -90,35 +90,35 @@ USER_PORTAL = """
 							"type": "plain_text",
 							"text": "Monday"
 						},
-						"value": "value-M"
+						"value": "M"
 					},
 					{
 						"text": {
 							"type": "plain_text",
 							"text": "Tuesday"
 						},
-						"value": "value-T"
+						"value": "T"
 					},
 					{
 						"text": {
 							"type": "plain_text",
 							"text": "Wednesday"
 						},
-						"value": "value-W"
+						"value": "W"
 					},
 					{
 						"text": {
 							"type": "plain_text",
 							"text": "Thursday"
 						},
-						"value": "value-TH"
+						"value": "TH"
 					},
 					{
 						"text": {
 							"type": "plain_text",
 							"text": "Friday"
 						},
-						"value": "value-F"
+						"value": "F"
 					}
 				],
 				"action_id": "null-action"
