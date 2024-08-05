@@ -39,7 +39,7 @@ def view_submission(ack, body, client, logger):
     data = body["view"]["state"]["values"]
     input_keys = list(data)
     name = body["view"]["state"]["values"][input_keys[0]]["null-action"]["value"]
-    membership = body["view"]["state"]["values"][input_keys[1]]["null-action"]["selected_option"]["text"]["value"]
+    membership = body["view"]["state"]["values"][input_keys[1]]["null-action"]["selected_option"]["value"]
     print(f"Name: {name}")
     print(f"Name: {membership}")
     #print(data)
