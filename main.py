@@ -38,6 +38,7 @@ def view_submission(ack, body, client, logger):
     ack()
     data = body["view"]["state"]["values"]
     input_keys = list(data)
+    print("AHHHHHHH")
     name = data[input_keys[0]]["null-action"]["value"]
     membership = data[input_keys[1]]["null-action"]["selected_option"]["value"]
     availability = data[input_keys[2]]["null-action"]["selected_options"]
