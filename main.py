@@ -45,6 +45,7 @@ def view_submission(ack, body, client, logger):
     print(f"Name: {name}")
     print(f"Name: {membership}")
     print(f"Name: {availability}")
+    print(body)
 
 
 # Modal Reponse Ack
