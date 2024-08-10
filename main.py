@@ -1,6 +1,6 @@
 from slack_bolt import App
 from modals import USER_PORTAL
-from database import USER_TABLE
+from database import USER_TABLE, USER_INSERT
 import os, logging, psycopg2
 
 logging.basicConfig(level=logging.DEBUG)
@@ -38,16 +38,12 @@ def view_submission(ack, body, client, logger):
     ack()
     data = body["view"]["state"]["values"]
     input_keys = list(data)
-    print("AHHHHHHH")
     name = data[input_keys[0]]["null-action"]["value"]
     membership = data[input_keys[1]]["null-action"]["selected_option"]["value"]
     availability = data[input_keys[2]]["null-action"]["selected_options"]
     slack_id = body["user"]["id"]
-    print(f"Name: {name}")
-    print(f"Name: {membership}")
-    print(f"Name: {availability}")
-    print(f"Slack Id: {slack_id}")
-
+    cursor.execute(USER_INSERT.format(slack_id, name, membership))
+    conn.commit()
 
 # Modal Reponse Ack
 @app.action("null-action")
