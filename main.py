@@ -57,7 +57,6 @@ if __name__ == '__main__':
                             password=os.getenv("POSTGRES_PASSWORD"),
                             port=os.getenv("PGPORT"))
     cursor = conn.cursor()
-    cursor.execute("DROP TABLE users;")
     cursor.execute(USER_TABLE)
     conn.commit()
     #print(cursor.fetchall())
