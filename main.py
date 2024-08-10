@@ -42,10 +42,11 @@ def view_submission(ack, body, client, logger):
     name = data[input_keys[0]]["null-action"]["value"]
     membership = data[input_keys[1]]["null-action"]["selected_option"]["value"]
     availability = data[input_keys[2]]["null-action"]["selected_options"]
+    slack_id = body["user"]["id"]
     print(f"Name: {name}")
     print(f"Name: {membership}")
     print(f"Name: {availability}")
-    print(body)
+    print(f"Slack Id: {slack_id}")
 
 
 # Modal Reponse Ack
