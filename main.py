@@ -42,7 +42,7 @@ def view_submission(ack, body, client, logger):
     membership = data[input_keys[1]]["null-action"]["selected_option"]["value"]
     availability = data[input_keys[2]]["null-action"]["selected_options"]
     slack_id = body["user"]["id"]
-    cursor.execute(USER_INSERT.format(slack_id, name, membership))
+    cursor.execute(USER_INSERT, (slack_id, name, membership))
     conn.commit()
 
 # Modal Reponse Ack

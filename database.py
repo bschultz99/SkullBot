@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS users (
 
 USER_INSERT = '''
 INSERT INTO users (slack_id, name, membership)
-VALUES ("{}", "{}", "{}")
+VALUES (%s, %s, %s)
 ON CONFLICT (slack_id)
 DO UPDATE SET name = excluded.name,
               membership = excluded.membership;
