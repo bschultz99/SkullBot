@@ -200,7 +200,7 @@ REMOVE_USER = """
 					"text": "Select an item",
 					"emoji": true
 				},
-				"options": {},
+				"options": '{}',
 				"action_id": "static_select-action"
 			}
 		}
