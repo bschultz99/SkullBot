@@ -65,13 +65,17 @@ def view_submission(ack, body, client, logger):
 def view_submission(ack, body, client, logger):
     ack()
 
+@app.view("remove-user-modal")
+def remove_user(ack, body, client, logger):
+    ack()
+
 # Modal Reponse Ack
 @app.action("null-action")
 def buttons(ack):
     ack()
 
 @app.action("remove-user")
-def remove_user(ack, body, client, logger):
+def remove_user_action(ack, body, client, logger):
     ack()
     logger.info(body)
     view_id = body['container']['view_id']
