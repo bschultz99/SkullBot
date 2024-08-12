@@ -76,7 +76,8 @@ def remove_user(ack, body, client, logger):
     logger.info(body)
     view_id = body['container']['view_id']
     cursor.execute(SELECT_ALL_USERS)
-    res = client.views_update(view_id=view_id, view=REMOVE_USER.format(generate_options(cursor.fetchall()[0])))
+    print(generate_options(cursor.fetchall()[0]))
+    #res = client.views_update(view_id=view_id, view=REMOVE_USER.format(generate_options(cursor.fetchall()[0])))
 
 if __name__ == '__main__':
     conn = psycopg2.connect(database=os.getenv("PGDATABASE"),
