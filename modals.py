@@ -196,7 +196,7 @@ REMOVE_USER = {
 					"text": "Select an item"
 				},
 				"options": [],
-				"action_id": "static_select-action"
+				"action_id": "null-action"
 			}
 		}
 	]
