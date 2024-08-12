@@ -78,9 +78,7 @@ def remove_user(ack, body, client, logger):
     cursor.execute(SELECT_ALL_USERS)
     modal = REMOVE_USER.copy()
     modal["blocks"][0]["accessory"]["options"] = generate_options(generate_options(cursor.fetchall()[0]))
-    print(modal)
-    #print(REMOVE_USER.format(generate_options(cursor.fetchall()[0])))
-    #res = client.views_update(view_id=view_id, view=REMOVE_USER.format(generate_options(cursor.fetchall()[0])))
+    res = client.views_update(view_id=view_id, view=modal)
 
 if __name__ == '__main__':
     conn = psycopg2.connect(database=os.getenv("PGDATABASE"),

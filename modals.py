@@ -1,8 +1,7 @@
 """MODAL VIEWS"""
 import json
 
-USER_PORTAL = """
-{
+USER_PORTAL = {
 	"type": "modal",
 	"callback_id": "user-portal-modal",
 	"title": {
@@ -131,10 +130,8 @@ USER_PORTAL = """
 		}
 	]
 }
-"""
 
-ADMIN_PORTAL = """
-{
+ADMIN_PORTAL = {
 	"title": {
 		"type": "plain_text",
 		"text": "Admin Portal"
@@ -173,7 +170,6 @@ ADMIN_PORTAL = """
 		}
 	]
 }
-"""
 
 REMOVE_USER = {
 	"title": {
