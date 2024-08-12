@@ -76,9 +76,9 @@ def remove_user(ack, body, client, logger):
     logger.info(body)
     view_id = body['container']['view_id']
     cursor.execute(SELECT_ALL_USERS)
-    print(cursor.fetchall())
-    print(generate_options(cursor.fetchall()))
-    print(generate_options(cursor.fetchall()[0]))
+    values = cursor.fetchall()
+    print(generate_options(values))
+    print(generate_options(values[0]))
     #res = client.views_update(view_id=view_id, view=REMOVE_USER.format(generate_options(cursor.fetchall())))
 
 if __name__ == '__main__':
