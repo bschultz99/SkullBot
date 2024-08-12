@@ -78,7 +78,8 @@ def remove_user(ack, body, client, logger):
     cursor.execute(SELECT_ALL_USERS)
     modal = REMOVE_USER.copy()
     modal["blocks"][0]["accessory"]["options"] = generate_options(generate_options(cursor.fetchall()[0]))
-    print(json.dumps(modal))
+    print(modal)
+    #print(json.dumps(modal))
     #res = client.views_update(view_id=view_id, view=json.dumps(modal))
 
 if __name__ == '__main__':
