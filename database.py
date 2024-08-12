@@ -15,3 +15,7 @@ ON CONFLICT (slack_id)
 DO UPDATE SET name = excluded.name,
               membership = excluded.membership;
 '''
+
+SELECT_ALL_USERS = '''
+SELECT name FROM users;
+'''

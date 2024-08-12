@@ -1,6 +1,6 @@
 from slack_bolt import App
 from modals import USER_PORTAL, ADMIN_PORTAL, REMOVE_USER
-from database import USER_TABLE, USER_INSERT
+from database import USER_TABLE, USER_INSERT, SELECT_ALL_USERS
 import os, logging, psycopg2
 
 logging.basicConfig(level=logging.DEBUG)
@@ -14,6 +14,14 @@ app = App(
 #def log_request(logger, body, next):
    # logger.debug(body)
    # next()
+
+
+def generate_options(options):
+    return [
+        {"text": {"type": "plain_text", "text": option}, "value": "null-action"}
+        for option in options
+    ]
+
 
 # Commands
 @app.command("/skull-help")
@@ -67,7 +75,8 @@ def remove_user(ack, body, client, logger):
     ack()
     logger.info(body)
     view_id = body['container']['view_id']
-    res = client.views_update(view_id=view_id, view=REMOVE_USER)
+    cursor.execute(SELECT_ALL_USERS)
+    res = client.views_update(view_id=view_id, view=REMOVE_USER.format(generate_options(cursor.fetchall())))
 
 if __name__ == '__main__':
     conn = psycopg2.connect(database=os.getenv("PGDATABASE"),
