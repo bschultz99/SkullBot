@@ -1,5 +1,5 @@
 from slack_bolt import App
-from modals import USER_PORTAL, ADMIN_PORTAL
+from modals import USER_PORTAL, ADMIN_PORTAL, REMOVE_USER
 from database import USER_TABLE, USER_INSERT
 import os, logging, psycopg2
 
@@ -61,6 +61,13 @@ def view_submission(ack, body, client, logger):
 @app.action("null-action")
 def buttons(ack):
     ack()
+
+@app.action("remove-user")
+def remove_user(ack, body, client, logger):
+    ack()
+    logger.info(body)
+    view_id = body['container']['view_id']
+    res = client.views_update(view_id=view_id, view=REMOVE_USER)
 
 if __name__ == '__main__':
     conn = psycopg2.connect(database=os.getenv("PGDATABASE"),
