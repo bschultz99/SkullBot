@@ -1,7 +1,7 @@
 from slack_bolt import App
 from modals import USER_PORTAL, ADMIN_PORTAL, REMOVE_USER
 from database import USER_TABLE, USER_INSERT, SELECT_ALL_USERS
-import os, logging, psycopg2
+import os, logging, psycopg2, json
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -76,7 +76,10 @@ def remove_user(ack, body, client, logger):
     logger.info(body)
     view_id = body['container']['view_id']
     cursor.execute(SELECT_ALL_USERS)
-    print(REMOVE_USER.format(generate_options(cursor.fetchall()[0])))
+    modal = REMOVE_USER.copy()
+    modal["blocks"][0]["accessory"]["options"] = generate_options(generate_options(cursor.fetchall()[0]))
+    print(modal)
+    #print(REMOVE_USER.format(generate_options(cursor.fetchall()[0])))
     #res = client.views_update(view_id=view_id, view=REMOVE_USER.format(generate_options(cursor.fetchall()[0])))
 
 if __name__ == '__main__':
