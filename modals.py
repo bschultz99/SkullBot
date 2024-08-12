@@ -131,3 +131,45 @@ USER_PORTAL = """
 	]
 }
 """
+
+ADMIN_PORTAL = """
+{
+	"title": {
+		"type": "plain_text",
+		"text": "Admin Portal"
+	},
+	"submit": {
+		"type": "plain_text",
+		"text": "Submit"
+	},
+	"type": "modal",
+	"callback_id": "admin-portal-modal",
+	"close": {
+		"type": "plain_text",
+		"text": "Cancel"
+	},
+	"blocks": [
+		{
+			"type": "section",
+			"text": {
+				"type": "plain_text",
+				"text": "Hello"
+			}
+		},
+		{
+			"type": "actions",
+			"elements": [
+				{
+					"type": "button",
+					"text": {
+						"type": "plain_text",
+						"text": "Remove A User"
+					},
+					"value": "remove-user",
+					"action_id": "remove-user"
+				}
+			]
+		}
+	]
+}
+"""

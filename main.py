@@ -1,5 +1,5 @@
 from slack_bolt import App
-from modals import USER_PORTAL
+from modals import USER_PORTAL, ADMIN_PORTAL
 from database import USER_TABLE, USER_INSERT
 import os, logging, psycopg2
 
@@ -32,6 +32,14 @@ def user_portal(body, ack, client, logger):
     res = client.views_open(trigger_id=body["trigger_id"], view=USER_PORTAL)
     logger.info(res)
 
+@app.command("/admin-portal")
+def admin_portal(body, ack, client, logger):
+    """Admin Portal"""
+    logger.info(body)
+    ack()
+    res = client.views_open(trigger_id=body["trigger_id"], view=ADMIN_PORTAL)
+    logger.info(res)
+
 # Modal View
 @app.view("user-portal-modal")
 def view_submission(ack, body, client, logger):
@@ -44,6 +52,10 @@ def view_submission(ack, body, client, logger):
     slack_id = body["user"]["id"]
     cursor.execute(USER_INSERT, (slack_id, name, membership))
     conn.commit()
+
+@app.view("admin-portal-modal")
+def view_submission(ack, body, client, logger):
+    ack()
 
 # Modal Reponse Ack
 @app.action("null-action")
