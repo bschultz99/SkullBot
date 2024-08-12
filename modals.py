@@ -1,4 +1,5 @@
 """MODAL VIEWS"""
+import json
 
 USER_PORTAL = """
 {
@@ -174,8 +175,7 @@ ADMIN_PORTAL = """
 }
 """
 
-REMOVE_USER = """
-{
+REMOVE_USER = {
 	"title": {
 		"type": "plain_text",
 		"text": "Admin Portal"
@@ -197,8 +197,7 @@ REMOVE_USER = """
 				"type": "static_select",
 				"placeholder": {
 					"type": "plain_text",
-					"text": "Select an item",
-					"emoji": true
+					"text": "Select an item"
 				},
 				"options": [],
 				"action_id": "static_select-action"
@@ -206,4 +205,3 @@ REMOVE_USER = """
 		}
 	]
 }
-"""
