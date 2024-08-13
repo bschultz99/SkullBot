@@ -181,7 +181,7 @@ REMOVE_USER = {
 		"text": "Submit"
 	},
 	"type": "modal",
-	"callback_id": "user-portal-modal",
+	"callback_id": "remove-user-modal",
 	"blocks": [
 		{
 			"type": "section",

@@ -1,7 +1,7 @@
 from slack_bolt import App
 from modals import USER_PORTAL, ADMIN_PORTAL, REMOVE_USER
 from database import USER_TABLE, USER_INSERT, SELECT_ALL_USERS
-import os, logging, psycopg2, json
+import os, logging, psycopg2
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -93,5 +93,4 @@ if __name__ == '__main__':
     cursor = conn.cursor()
     cursor.execute(USER_TABLE)
     conn.commit()
-    #print(cursor.fetchall())
     app.start(3000)
