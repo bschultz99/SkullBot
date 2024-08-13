@@ -16,11 +16,9 @@ app = App(
    # next()
 
 
-def generate_options(options):
-    print(type(options))
+def generate_options(option):
     return [
         {"text": {"type": "plain_text", "text": option[0]}, "value": option[1]}
-        for option in options
     ]
 
 
