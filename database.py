@@ -17,5 +17,8 @@ DO UPDATE SET name = excluded.name,
 '''
 
 SELECT_ALL_USERS = '''
-SELECT name FROM users;
+SELECT name, slack_id FROM users;
+'''
+
+REMOVE_USER = '''
 '''

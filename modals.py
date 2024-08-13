@@ -1,5 +1,4 @@
 """MODAL VIEWS"""
-import json
 
 USER_PORTAL = {
 	"type": "modal",

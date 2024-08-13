@@ -18,7 +18,7 @@ app = App(
 
 def generate_options(options):
     return [
-        {"text": {"type": "plain_text", "text": option}, "value": "null-action"}
+        {"text": {"type": "plain_text", "text": option[0]}, "value": option[1]}
         for option in options
     ]
 
@@ -82,7 +82,8 @@ def remove_user_action(ack, body, client, logger):
     cursor.execute(SELECT_ALL_USERS)
     modal = REMOVE_USER.copy()
     modal["blocks"][0]["accessory"]["options"] = generate_options((cursor.fetchall()[0]))
-    res = client.views_update(view_id=view_id, view=str(modal))
+    print(modal)
+    #res = client.views_update(view_id=view_id, view=str(modal))
 
 if __name__ == '__main__':
     conn = psycopg2.connect(database=os.getenv("PGDATABASE"),
