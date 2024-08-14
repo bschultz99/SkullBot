@@ -36,16 +36,7 @@ INSERT INTO takedowns(slack_id,
                         friday_lunch,
                         friday_dinner) 
 VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s,%s ,%s)
-ON CONFLICT (monday_lunch,
-             monday_dinner,
-             tuesday_lunch,
-             tuesday_dinner,
-             wednesday_lunch,
-             wednesday_dinner,
-             thursday_lunch,
-             thursday_dinner,
-             friday_lunch,
-             friday_dinner)
+ON CONFLICT (slack_id)
 DO UPDATE SET monday_lunch = excluded.monday_lunch,
               monday_dinner = excluded.monday_dinner,
               tuesday_lunch = excluded.tuesday_lunch,
