@@ -17,7 +17,6 @@ app = App(
 
 
 def generate_options(options):
-    print(options[0])
     return [
         {"text": {"type": "plain_text", "text": option[0]}, "value": option[1]}
         for option in options
@@ -83,7 +82,7 @@ def remove_user_action(ack, body, client, logger):
     cursor.execute(SELECT_ALL_USERS)
     modal = REMOVE_USER.copy()
     modal["blocks"][0]["accessory"]["options"] = generate_options((cursor.fetchall()))
-    #print(modal)
+    print(modal)
     #res = client.views_update(view_id=view_id, view=str(modal))
 
 if __name__ == '__main__':
