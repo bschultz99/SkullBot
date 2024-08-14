@@ -24,9 +24,22 @@ def generate_options(options):
 
 def takedown_availability(input):
     takedowns = [False] * 10
+    takedowns_index = {
+        'ML': 0,
+        'MD': 1,
+        'TL': 2,
+        'TD': 3,
+        'WL': 4,
+        'WD': 5,
+        'HL': 6,
+        'HD': 7,
+        'FL': 8,
+        'FD': 9
+    }
     for takedown in input:
-        print(takedown['value'])
-
+        day = takedown['value']
+        takedowns[takedowns_index[day]] = True
+    return takedowns
 
 # Commands
 @app.command("/skull-help")
@@ -62,7 +75,8 @@ def view_submission(ack, body, client, logger):
     name = data[input_keys[0]]["null-action"]["value"]
     membership = data[input_keys[1]]["null-action"]["selected_option"]["value"]
     availability = data[input_keys[2]]["null-action"]["selected_options"]
-    takedown_availability(availability)
+    takedowns = takedown_availability(availability)
+    print(takedowns)
     slack_id = body["user"]["id"]
     cursor.execute(USER_INSERT, (slack_id, name, membership))
     cursor.execute(TAKEDOWN_INSERT, (slack_id,))
