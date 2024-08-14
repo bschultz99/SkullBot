@@ -76,10 +76,9 @@ def view_submission(ack, body, client, logger):
     membership = data[input_keys[1]]["null-action"]["selected_option"]["value"]
     availability = data[input_keys[2]]["null-action"]["selected_options"]
     takedowns = takedown_availability(availability)
-    print(takedowns)
     slack_id = body["user"]["id"]
     cursor.execute(USER_INSERT, (slack_id, name, membership))
-    cursor.execute(TAKEDOWN_INSERT, (slack_id,))
+    cursor.execute(TAKEDOWN_INSERT, (slack_id, *takedowns))
     conn.commit()
 
 @app.view("admin-portal-modal")

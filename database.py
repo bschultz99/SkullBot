@@ -34,7 +34,7 @@ INSERT INTO takedowns(slack_id,
                         thursday_lunch,
                         thursday_dinner,
                         friday_lunch,
-                        friday_dinner) VALUES (%s);
+                        friday_dinner) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s,%s ,%s);
 '''
 
 
