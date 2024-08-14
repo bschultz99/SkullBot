@@ -25,7 +25,7 @@ def generate_options(options):
 def takedown_availability(input):
     takedowns = [False] * 10
     for takedown in input:
-        print(takedown)
+        print(takedown['value'])
 
 
 # Commands
