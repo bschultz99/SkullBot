@@ -20,6 +20,6 @@ SELECT_ALL_USERS = '''
 SELECT name, slack_id FROM users;
 '''
 
-REMOVE_USER = '''
+REMOVE_SELECTED_USER = '''
 DELETE FROM users WHERE slack_id = %s;
 '''
