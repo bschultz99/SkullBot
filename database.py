@@ -24,7 +24,17 @@ CREATE TABLE IF NOT EXISTS takedowns (
 """
 
 TAKEDOWN_INSERT = '''
-INSERT INTO takedowns(slack_id) VALUES (%s);
+INSERT INTO takedowns(slack_id,
+                        monday_lunch,
+                        monday_dinner,
+                        tuesday_lunch,
+                        tuesday_dinner,
+                        wednesday_lunch,
+                        wednesday_dinner,
+                        thursday_lunch,
+                        thursday_dinner,
+                        friday_lunch,
+                        friday_dinner) VALUES (%s);
 '''
 
 
