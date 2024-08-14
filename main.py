@@ -82,7 +82,7 @@ def remove_user_action(ack, body, client, logger):
     view_id = body['container']['view_id']
     cursor.execute(SELECT_ALL_USERS)
     modal = REMOVE_USER.copy()
-    modal["blocks"][0]["accessory"]["options"] = generate_options((cursor.fetchall()[0]))
+    modal["blocks"][0]["accessory"]["options"] = generate_options((cursor.fetchall()))
     #print(modal)
     #res = client.views_update(view_id=view_id, view=str(modal))
 
