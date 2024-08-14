@@ -78,6 +78,7 @@ def view_submission(ack, body, client, logger):
     takedowns = takedown_availability(availability)
     slack_id = body["user"]["id"]
     cursor.execute(USER_INSERT, (slack_id, name, membership))
+    conn.commit()
     cursor.execute(TAKEDOWN_INSERT, (slack_id, *takedowns))
     conn.commit()
 
