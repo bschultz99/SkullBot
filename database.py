@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS users (
 CREATE TABLE IF NOT EXISTS takedowns (
     slack_id VARCHAR(255) PRIMARY KEY REFERENCES users(slack_id) ON DELETE CASCADE,
     used BOOLEAN DEFAULT FALSE,
-    takedown_count INTEGER DEFAULT FALSE,
+    takedown_count INTEGER DEFAULT 0,
     monday_lunch BOOLEAN DEFAULT FALSE,
     monday_dinner BOOLEAN DEFAULT FALSE,
     tuesday_lunch BOOLEAN DEFAULT FALSE,
