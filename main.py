@@ -1,6 +1,6 @@
 from slack_bolt import App
 from modals import USER_PORTAL, ADMIN_PORTAL, REMOVE_USER
-from database import USER_TABLE, USER_INSERT, SELECT_ALL_USERS, REMOVE_SELECTED_USER
+from database import USER_TABLE, USER_INSERT, SELECT_ALL_USERS, REMOVE_SELECTED_USER, TAKEDOWN_INSERT
 import os, logging, psycopg2
 
 logging.basicConfig(level=logging.DEBUG)
@@ -59,6 +59,7 @@ def view_submission(ack, body, client, logger):
     availability = data[input_keys[2]]["null-action"]["selected_options"]
     slack_id = body["user"]["id"]
     cursor.execute(USER_INSERT, (slack_id, name, membership))
+    cursor.execute(TAKEDOWN_INSERT, (slack_id,))
     conn.commit()
 
 @app.view("admin-portal-modal")

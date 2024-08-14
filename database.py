@@ -23,6 +23,11 @@ CREATE TABLE IF NOT EXISTS takedowns (
     );
 """
 
+TAKEDOWN_INSERT = '''
+INSERT INTO takedowns(slack_id) VALUES (%s);
+'''
+
+
 USER_INSERT = '''
 INSERT INTO users (slack_id, name, membership)
 VALUES (%s, %s, %s)
