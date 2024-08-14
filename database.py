@@ -21,4 +21,5 @@ SELECT name, slack_id FROM users;
 '''
 
 REMOVE_USER = '''
+DELETE FROM users WHERE slack_id = %s;
 '''
