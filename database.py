@@ -81,7 +81,7 @@ FROM takedowns
 INNER JOIN users
 ON users.slack_id = takedowns.slack_id
 WHERE users.membership != 'NM'
-ORDER BY takedowns.{} DESC, takedowns.;
+ORDER BY takedowns.{} DESC, takedowns.takedown_count;
 '''
 
 TAKEDOWN_MEMBER_COUNT = '''
