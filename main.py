@@ -6,7 +6,6 @@ from database import (USER_TABLE,
                       REMOVE_SELECTED_USER,
                       TAKEDOWN_INSERT,
                       TAKEDOWNS_WEEKLY,
-                      TAKEDOWNS_INSERT_SLACK,
                       TAKEDOWN_MEMBER_COUNT,
                       TAKEDOWNS_SUM_COUNT)
 import os, logging, psycopg2
@@ -168,17 +167,30 @@ def generate_takedonws(ack, body, client, logger):
     view_id = body['container']['view_id']
     cursor.execute(TAKEDOWNS_WEEKLY)
     conn.commit()
-    cursor.execute(TAKEDOWNS_INSERT_SLACK)
-    conn.commit()
     cursor.execute(TAKEDOWN_MEMBER_COUNT)
     number_of_members = cursor.fetchone()[0]
-    takedown_count = 0
+    takedown_count = 1
     if number_of_members >= 11:
-        takedown_count = 1
-    elif number_of_members >= 21:
         takedown_count = 2
+    elif number_of_members >= 21:
+        takedown_count = 3
     cursor.execute(TAKEDOWNS_SUM_COUNT)
-    print(cursor.fetchone())
+    sums = cursor.fetchone()
+    takedowns_sums = {
+        'ML': [sums[0], 0],
+        'MD': [sums[1], 0],
+        'TL': [sums[2], 0],
+        'TD': [sums[3], 0],
+        'WL': [sums[4], 0],
+        'WD': [sums[5], 0],
+        'HL': [sums[6], 0],
+        'HD': [sums[7], 0],
+        'FL': [sums[8], 0],
+        'FD': [sums[9], 0]
+    }
+    for _ in range(10):
+        min_key = min(takedowns_sums, key=lambda k: takedowns_sums[k][0])
+        print(min_key)
 
 
 
