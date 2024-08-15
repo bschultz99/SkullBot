@@ -8,7 +8,8 @@ from database import (USER_TABLE,
                       TAKEDOWNS_WEEKLY,
                       TAKEDOWN_MEMBER_COUNT,
                       TAKEDOWNS_SUM_COUNT,
-                      TAKEDOWNS_ACTIVE_SELECT)
+                      TAKEDOWNS_ACTIVE_SELECT,
+                      TAKEDOWNS_UPDATE_ASSIGNMENT)
 import os, logging, psycopg2
 
 logging.basicConfig(level=logging.DEBUG)
@@ -193,7 +194,9 @@ def generate_takedonws(ack, body, client, logger):
         min_key = min((key for key in takedowns_sums if takedowns_sums[key][1] == 0), key=lambda k: takedowns_sums[k][0])
         takedowns_sums[min_key][1] += 1
         cursor.execute(TAKEDOWNS_ACTIVE_SELECT.format(min_key))
-        print(cursor.fetchone())
+        person = cursor.fetchone()
+        cursor.execute(TAKEDOWNS_UPDATE_ASSIGNMENT.format(person[0], min_key, person[0]))
+        conn.commit()
 
 
 

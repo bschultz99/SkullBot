@@ -103,3 +103,12 @@ SELECT
     SUM(CASE WHEN friday_dinner THEN 1 ELSE 0 END) AS friday_dinner_count
 FROM takedowns;
 '''
+
+TAKEDOWNS_UPDATE_ASSIGNMENT = '''
+UPDATE takedowns 
+SET takedown_count = takedown_count + 1
+WHERE slack_id = %s;
+UPDATE takedowns_weekly
+SET assignment = %s
+WHERE slack_id = %s;
+'''
