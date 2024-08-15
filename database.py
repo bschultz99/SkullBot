@@ -8,7 +8,6 @@ CREATE TABLE IF NOT EXISTS users (
     );
 CREATE TABLE IF NOT EXISTS takedowns (
     slack_id VARCHAR(255) PRIMARY KEY REFERENCES users(slack_id) ON DELETE CASCADE,
-    used BOOLEAN DEFAULT FALSE,
     takedown_count INTEGER DEFAULT 0,
     monday_lunch BOOLEAN DEFAULT FALSE,
     monday_dinner BOOLEAN DEFAULT FALSE,
@@ -77,11 +76,12 @@ SELECT slack_id FROM users;
 '''
 
 TAKEDOWNS_ACTIVE_SELECT = '''
-SELECT *
+SELECT takedowns.* 
 FROM takedowns 
 INNER JOIN users
 ON users.slack_id = takedowns.slack_id
-WHERE users.membership != 'NM';
+WHERE users.membership != 'NM'
+ORDER BY takedowns.{} DESC, takedowns.;
 '''
 
 TAKEDOWN_MEMBER_COUNT = '''
