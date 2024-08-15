@@ -127,7 +127,7 @@ def generate_takedonws(ack, body, client, logger):
     cursor.execute(TAKEDOWNS_INSERT_SLACK)
     conn.commit()
     cursor.execute(TAKEDOWN_MEMBER_COUNT)
-    print(cursor.fetchall())
+    print(cursor.fetchall()[0])
 
 
 if __name__ == '__main__':
