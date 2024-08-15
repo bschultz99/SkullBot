@@ -173,6 +173,15 @@ ADMIN_PORTAL = {
 					},
 					"value": "generate-takedowns",
 					"action_id": "generate-takedowns"
+				},
+                {
+					"type": "button",
+					"text": {
+						"type": "plain_text",
+						"text": "Insert data"
+					},
+					"value": "insert-data",
+					"action_id": "insert-data"
 				}
 			]
 		}

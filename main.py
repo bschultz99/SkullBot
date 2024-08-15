@@ -116,6 +116,46 @@ def remove_user_action(ack, body, client, logger):
     cursor.execute(REMOVE_SELECTED_USER, (slack_id,))
     conn.commit()
 
+@app.action("insert-data")
+def insert_data(ack, body, client, logger):
+    ack()
+    users = [('1','1', 'IH-2'),
+             ('2','2', 'IH-2'),
+             ('3','3', 'IH-2'),
+             ('4','4', 'IH-2'),
+             ('5','5', 'IH-2'),
+             ('6','6', 'IH-2'),
+             ('7','7', 'IH-2'),
+             ('8','8', 'IH-2'),
+             ('9','9', 'IH-2'),
+             ('10','10', 'IH-2'),
+             ('11','11', 'IH-2'),
+             ('12','12', 'IH-2'),
+             ('13','13', 'IH-2'),
+             ('14','14', 'IH-2'),
+             ('15','15', 'IH-2'),
+             ('16','16', 'IH-2'),]
+    takedowns = [('1', [True, False, True, False, True, False, True, False, False, False]),
+                 ('2', [False, True, True, True, False, False, False, False, True, True]),
+                 ('3', [True, False, False, False, False, False, False, True, False, False]),
+                 ('4', [False, True, True, True, True, True, False, False, False, False]),
+                 ('5', [True, False, True, False, True, False, True, False, True, False]),
+                 ('6', [False, True, False, True, False, True, False, True, False, True]),
+                 ('7', [True, False, False, False, False, False, False, False, False, False]),
+                 ('8', [False, True, True, True, False, False, False, False, False, False]),
+                 ('9', [False, False, False, False, True, True, True, False, False, False]),
+                 ('10', [False, False, False, False, False, False, True, True, True, True]),
+                 ('11', [True, False, True, False, True, False, False, False, False, True]),
+                 ('12', [False, True, True, False, False, False, False, False, False, False]),
+                 ('13', [False, True, False, True, False, True, False, True, True, True]),
+                 ('14', [True, False, True, False, True, False, True, False, False, False]),
+                 ('15', [False, True, False, False, True, False, False, False, False, False]),
+                 ('16', [False, False, True, False, False, False, True, False, False, False]),
+    ]
+    for user in users:
+        cursor.execute(USER_INSERT, user)
+        conn.commit()
+
 # Execute Takedown Generation
 @app.action("generate-takedowns")
 def generate_takedonws(ack, body, client, logger):
