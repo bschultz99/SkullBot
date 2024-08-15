@@ -171,11 +171,11 @@ def generate_takedonws(ack, body, client, logger):
     conn.commit()
     cursor.execute(TAKEDOWN_MEMBER_COUNT)
     number_of_members = cursor.fetchone()[0]
-    takedown_count = 1
+    takedown_count = 0
     if number_of_members >= 11:
-        takedown_count = 2
+        takedown_count = 1
     elif number_of_members >= 21:
-        takedown_count = 3
+        takedown_count = 2
     cursor.execute(TAKEDOWNS_SUM_COUNT)
     sums = cursor.fetchone()
     takedowns_sums = {
