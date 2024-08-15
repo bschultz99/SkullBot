@@ -7,7 +7,8 @@ from database import (USER_TABLE,
                       TAKEDOWN_INSERT,
                       TAKEDOWNS_WEEKLY,
                       TAKEDOWN_MEMBER_COUNT,
-                      TAKEDOWNS_SUM_COUNT)
+                      TAKEDOWNS_SUM_COUNT,
+                      TAKEDOWNS_ACTIVE_SELECT)
 import os, logging, psycopg2
 
 logging.basicConfig(level=logging.DEBUG)
@@ -177,21 +178,22 @@ def generate_takedonws(ack, body, client, logger):
     cursor.execute(TAKEDOWNS_SUM_COUNT)
     sums = cursor.fetchone()
     takedowns_sums = {
-        'ML': [sums[0], 0],
-        'MD': [sums[1], 0],
-        'TL': [sums[2], 0],
-        'TD': [sums[3], 0],
-        'WL': [sums[4], 0],
-        'WD': [sums[5], 0],
-        'HL': [sums[6], 0],
-        'HD': [sums[7], 0],
-        'FL': [sums[8], 0],
-        'FD': [sums[9], 0]
+        'monday_lunch': [sums[0], 0],
+        'monday_dinner': [sums[1], 0],
+        'tuesday_lunch': [sums[2], 0],
+        'tuesday_dinner': [sums[3], 0],
+        'wednesday_lunch': [sums[4], 0],
+        'wednesday_dinner': [sums[5], 0],
+        'thursday_lunch': [sums[6], 0],
+        'thursday_dinner': [sums[7], 0],
+        'friday_lunch': [sums[8], 0],
+        'friday_dinner': [sums[9], 0]
     }
     for _ in range(10):
         min_key = min((key for key in takedowns_sums if takedowns_sums[key][1] == 0), key=lambda k: takedowns_sums[k][0])
-        print(min_key)
         takedowns_sums[min_key][1] += 1
+    cursor.execute(TAKEDOWNS_ACTIVE_SELECT)
+    print(cursor.fetchall())
 
 
 

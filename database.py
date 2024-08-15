@@ -72,15 +72,20 @@ CREATE TABLE IF NOT EXISTS takedowns_weekly (
     slack_id VARCHAR(255) PRIMARY KEY REFERENCES users(slack_id) ON DELETE CASCADE,
     assignment VARCHAR(255)
 );
+INSERT INTO takedowns_weekly (slack_id)
+SELECT slack_id FROM users;
+'''
+
+TAKEDOWNS_ACTIVE_SELECT = '''
+SELECT *
+FROM takedowns 
+INNER JOIN users
+ON users.slack_id = takedowns.slack_id
+WHERE users.membership != 'NM';
 '''
 
 TAKEDOWN_MEMBER_COUNT = '''
 SELECT COUNT(*) as total_entries FROM takedowns;
-'''
-
-TAKEDOWNS_INSERT_SLACK = '''
-INSERT INTO takedowns_weekly (slack_id)
-SELECT slack_id FROM users;
 '''
 
 TAKEDOWNS_SUM_COUNT = '''
