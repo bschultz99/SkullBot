@@ -69,7 +69,7 @@ TAKEDOWNS_WEEKLY = '''
 DROP TABLE IF EXISTS takedowns_weekly;
 CREATE TABLE IF NOT EXISTS takedowns_weekly (
     slack_id VARCHAR(255) PRIMARY KEY REFERENCES users(slack_id) ON DELETE CASCADE,
-    assignment VARCHAR(255)
+    assignment VARCHAR(255) DEFAULT ''
 );
 INSERT INTO takedowns_weekly (slack_id)
 SELECT slack_id FROM users;
@@ -109,6 +109,6 @@ UPDATE takedowns
 SET takedown_count = takedown_count + 1
 WHERE slack_id = %s;
 UPDATE takedowns_weekly
-SET assignment = %s
+SET assignment = assignment || %s
 WHERE slack_id = %s;
 '''
