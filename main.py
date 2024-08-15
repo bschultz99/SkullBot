@@ -155,6 +155,9 @@ def insert_data(ack, body, client, logger):
     for user in users:
         cursor.execute(USER_INSERT, user)
         conn.commit()
+    for takedown in takedowns:
+        cursor.execute(TAKEDOWN_INSERT, (takedown[0], *takedown[1]))
+        conn.commit()
 
 # Execute Takedown Generation
 @app.action("generate-takedowns")
