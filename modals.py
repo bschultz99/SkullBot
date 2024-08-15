@@ -164,6 +164,15 @@ ADMIN_PORTAL = {
 					},
 					"value": "remove-user",
 					"action_id": "remove-user"
+				},
+                {
+					"type": "button",
+					"text": {
+						"type": "plain_text",
+						"text": "Generate Takedonws"
+					},
+					"value": "generate-takedowns",
+					"action_id": "generate-takedowns"
 				}
 			]
 		}

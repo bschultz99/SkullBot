@@ -1,6 +1,6 @@
 from slack_bolt import App
 from modals import USER_PORTAL, ADMIN_PORTAL, REMOVE_USER
-from database import USER_TABLE, USER_INSERT, SELECT_ALL_USERS, REMOVE_SELECTED_USER, TAKEDOWN_INSERT
+from database import USER_TABLE, USER_INSERT, SELECT_ALL_USERS, REMOVE_SELECTED_USER, TAKEDOWN_INSERT, TAKEDOWNS_WEEKLY
 import os, logging, psycopg2
 
 logging.basicConfig(level=logging.DEBUG)
@@ -95,6 +95,7 @@ def remove_user(ack, body, client, logger):
 def buttons(ack):
     ack()
 
+#Display Remove Users Screen
 @app.action("remove-user")
 def remove_user_action(ack, body, client, logger):
     ack()
@@ -107,6 +108,16 @@ def remove_user_action(ack, body, client, logger):
     slack_id = res['view']['blocks'][0]['accessory']['options'][0]['value']
     cursor.execute(REMOVE_SELECTED_USER, (slack_id,))
     conn.commit()
+
+# Execute Takedown Generation
+@app.action("generate-takedowns")
+def generate_takedonws(ack, body, client, logger):
+    ack()
+    logger.info(body)
+    view_id = body['container']['view_id']
+    cursor.execute(TAKEDOWNS_WEEKLY)
+    conn.commit()
+    
 
 if __name__ == '__main__':
     conn = psycopg2.connect(database=os.getenv("PGDATABASE"),
