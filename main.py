@@ -7,7 +7,8 @@ from database import (USER_TABLE,
                       TAKEDOWN_INSERT,
                       TAKEDOWNS_WEEKLY,
                       TAKEDOWNS_INSERT_SLACK,
-                      TAKEDOWN_MEMBER_COUNT)
+                      TAKEDOWN_MEMBER_COUNT,
+                      TAKEDOWNS_SUM_COUNT)
 import os, logging, psycopg2
 
 logging.basicConfig(level=logging.DEBUG)
@@ -171,13 +172,13 @@ def generate_takedonws(ack, body, client, logger):
     conn.commit()
     cursor.execute(TAKEDOWN_MEMBER_COUNT)
     number_of_members = cursor.fetchone()[0]
-    print(number_of_members)
     takedown_count = 0
     if number_of_members >= 11:
         takedown_count = 1
     elif number_of_members >= 21:
         takedown_count = 2
-    print(takedown_count)
+    cursor.execute(TAKEDOWNS_SUM_COUNT)
+    print(cursor.fetchall())
 
 
 
