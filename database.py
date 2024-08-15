@@ -49,15 +49,6 @@ DO UPDATE SET monday_lunch = excluded.monday_lunch,
               friday_dinner = excluded.friday_dinner;
 '''
 
-TAKEDOWNS_WEEKLY = '''
-CREATE TABLE IF NOT EXISTS takedowns_weekly (
-    slack_id VARCHAR(255) PRIMARY KEY REFERENCES users(slack_id) ON DELETE CASCADE,
-    assignment VARCHAR(255)
-);
-'''
-
-
-
 USER_INSERT = '''
 INSERT INTO users (slack_id, name, membership)
 VALUES (%s, %s, %s)
@@ -72,4 +63,17 @@ SELECT name, slack_id FROM users;
 
 REMOVE_SELECTED_USER = '''
 DELETE FROM users WHERE slack_id = %s;
+'''
+
+#Generate Takedowns
+TAKEDOWNS_WEEKLY = '''
+CREATE TABLE IF NOT EXISTS takedowns_weekly (
+    slack_id VARCHAR(255) PRIMARY KEY REFERENCES users(slack_id) ON DELETE CASCADE,
+    assignment VARCHAR(255)
+);
+'''
+
+TAKEDOWNS_INSERT_SLACK = '''
+INSERT INTO takedowns_weekly (slack_id)
+SELECT slack_id FROM users;
 '''

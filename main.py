@@ -1,6 +1,6 @@
 from slack_bolt import App
 from modals import USER_PORTAL, ADMIN_PORTAL, REMOVE_USER
-from database import USER_TABLE, USER_INSERT, SELECT_ALL_USERS, REMOVE_SELECTED_USER, TAKEDOWN_INSERT, TAKEDOWNS_WEEKLY
+from database import USER_TABLE, USER_INSERT, SELECT_ALL_USERS, REMOVE_SELECTED_USER, TAKEDOWN_INSERT, TAKEDOWNS_WEEKLY, TAKEDOWNS_INSERT_SLACK
 import os, logging, psycopg2
 
 logging.basicConfig(level=logging.DEBUG)
@@ -117,7 +117,9 @@ def generate_takedonws(ack, body, client, logger):
     view_id = body['container']['view_id']
     cursor.execute(TAKEDOWNS_WEEKLY)
     conn.commit()
-    
+    cursor.execute(TAKEDOWNS_INSERT_SLACK)
+    conn.commit()
+
 
 if __name__ == '__main__':
     conn = psycopg2.connect(database=os.getenv("PGDATABASE"),
