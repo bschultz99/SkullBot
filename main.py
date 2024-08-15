@@ -197,6 +197,16 @@ def generate_takedonws(ack, body, client, logger):
         person = cursor.fetchone()
         cursor.execute(TAKEDOWNS_UPDATE_ASSIGNMENT, (person[0], min_key, person[0]))
         conn.commit()
+    cursor.execute('''
+SELECT takedowns.* 
+FROM takedowns 
+INNER JOIN users
+ON users.slack_id = takedowns.slack_id
+WHERE users.membership != 'NM'
+AND takedowns.monday_dinner = TRUE
+ORDER BY takedowns.takedown_count;
+''')
+    print(cursor.fetchall())
 
 
 
