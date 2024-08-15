@@ -73,6 +73,10 @@ CREATE TABLE IF NOT EXISTS takedowns_weekly (
 );
 '''
 
+TAKEDOWN_MEMBER_COUNT = '''
+SELECT COUNT(*) as total_entries FROM takedowns;
+'''
+
 TAKEDOWNS_INSERT_SLACK = '''
 INSERT INTO takedowns_weekly (slack_id)
 SELECT slack_id FROM users;

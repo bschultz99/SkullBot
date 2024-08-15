@@ -1,6 +1,13 @@
 from slack_bolt import App
 from modals import USER_PORTAL, ADMIN_PORTAL, REMOVE_USER
-from database import USER_TABLE, USER_INSERT, SELECT_ALL_USERS, REMOVE_SELECTED_USER, TAKEDOWN_INSERT, TAKEDOWNS_WEEKLY, TAKEDOWNS_INSERT_SLACK
+from database import (USER_TABLE,
+                      USER_INSERT,
+                      SELECT_ALL_USERS,
+                      REMOVE_SELECTED_USER,
+                      TAKEDOWN_INSERT,
+                      TAKEDOWNS_WEEKLY,
+                      TAKEDOWNS_INSERT_SLACK,
+                      TAKEDOWN_MEMBER_COUNT)
 import os, logging, psycopg2
 
 logging.basicConfig(level=logging.DEBUG)
@@ -119,6 +126,8 @@ def generate_takedonws(ack, body, client, logger):
     conn.commit()
     cursor.execute(TAKEDOWNS_INSERT_SLACK)
     conn.commit()
+    cursor.execute(TAKEDOWN_MEMBER_COUNT)
+    print(cursor.fetchall())
 
 
 if __name__ == '__main__':
