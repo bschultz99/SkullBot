@@ -178,7 +178,7 @@ def generate_takedonws(ack, body, client, logger):
     elif number_of_members >= 21:
         takedown_count = 2
     cursor.execute(TAKEDOWNS_SUM_COUNT)
-    print(cursor.fetchall())
+    print(cursor.fetchone())
 
 
 
