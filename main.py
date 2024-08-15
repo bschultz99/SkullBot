@@ -194,6 +194,7 @@ def generate_takedonws(ack, body, client, logger):
         takedowns_sums[min_key][1] += 1
     cursor.execute(TAKEDOWNS_ACTIVE_SELECT.format(min_key))
     print(cursor.fetchall())
+    print('hi')
 
 
 
