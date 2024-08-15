@@ -67,6 +67,7 @@ DELETE FROM users WHERE slack_id = %s;
 
 #Generate Takedowns
 TAKEDOWNS_WEEKLY = '''
+DROP TABLE IF EXISTS takedowns_weekly;
 CREATE TABLE IF NOT EXISTS takedowns_weekly (
     slack_id VARCHAR(255) PRIMARY KEY REFERENCES users(slack_id) ON DELETE CASCADE,
     assignment VARCHAR(255)
