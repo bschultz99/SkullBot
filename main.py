@@ -191,6 +191,7 @@ def generate_takedonws(ack, body, client, logger):
     for _ in range(10):
         min_key = min(takedowns_sums, key=lambda k: takedowns_sums[k][0])
         print(min_key)
+        takedowns_sums[min_key][1] += 1
 
 
 
