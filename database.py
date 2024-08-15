@@ -82,3 +82,18 @@ TAKEDOWNS_INSERT_SLACK = '''
 INSERT INTO takedowns_weekly (slack_id)
 SELECT slack_id FROM users;
 '''
+
+TAKEDOWNS_SUM_COUNT = '''
+SELECT
+    SUM(CASE WHEN monday_lunch THEN 1 ELSE 0 END) AS monday_lunch_count,
+    SUM(CASE WHEN monday_dinner THEN 1 ELSE 0 END) AS monday_dinner_count,
+    SUM(CASE WHEN tuesday_lunch THEN 1 ELSE 0 END) AS tuesday_lunch_count,
+    SUM(CASE WHEN tuesday_dinner THEN 1 ELSE 0 END) AS tuesday_dinner_count,
+    SUM(CASE WHEN wednesday_lunch THEN 1 ELSE 0 END) AS wednesday_lunch_count,
+    SUM(CASE WHEN wednesday_dinner THEN 1 ELSE 0 END) AS wednesday_dinner_count,
+    SUM(CASE WHEN thursday_lunch THEN 1 ELSE 0 END) AS thursday_lunch_count,
+    SUM(CASE WHEN thursday_dinner THEN 1 ELSE 0 END) AS thursday_dinner_count,
+    SUM(CASE WHEN friday_lunch THEN 1 ELSE 0 END) AS friday_lunch_count,
+    SUM(CASE WHEN friday_dinner THEN 1 ELSE 0 END) AS friday_dinner_count
+FROM takedowns;
+'''
