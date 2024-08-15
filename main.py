@@ -207,4 +207,6 @@ if __name__ == '__main__':
     cursor = conn.cursor()
     cursor.execute(USER_TABLE)
     conn.commit()
+    cursor.execute("ALTER TABLE takedowns DROP COLUMN used;")
+    conn.commit()
     app.start(3000)
