@@ -171,7 +171,7 @@ def generate_takedonws(ack, body, client, logger):
     conn.commit()
     cursor.execute(TAKEDOWN_MEMBER_COUNT)
     number_of_members = cursor.fetchone()[0]
-    print(takedown_count)
+    print(number_of_members)
     takedown_count = 0
     if number_of_members >= 11:
         takedown_count = 1
