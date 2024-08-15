@@ -198,8 +198,13 @@ def generate_takedonws(ack, body, client, logger):
         cursor.execute(TAKEDOWNS_UPDATE_ASSIGNMENT, (person[0], min_key, person[0]))
         conn.commit()
     for x in range(takedown_count):
-        print(x)
-    print(takedown_count)
+        for _ in range(10):
+            min_key = min((key for key in takedowns_sums if takedowns_sums[key][1] == 0), key=lambda k: takedowns_sums[k][0])
+            takedowns_sums[min_key][1] += 1
+            cursor.execute(TAKEDOWNS_ACTIVE_SELECT.format(min_key))
+            person = cursor.fetchone()
+            cursor.execute(TAKEDOWNS_UPDATE_ASSIGNMENT, (person[0], min_key, person[0]))
+            conn.commit()
 
 
 if __name__ == '__main__':
