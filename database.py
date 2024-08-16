@@ -125,5 +125,6 @@ WHERE slack_id = %s;
 TAKEDOWN_DISPLAY = '''
 SELECT users.name, takedowns_weekly.assignment
 FROM takedowns_weekly
-INNER JOIN users;
+INNER JOIN users
+ON users.slack_id = takedowns.slack_id;
 '''
