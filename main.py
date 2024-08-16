@@ -209,16 +209,12 @@ def generate_takedonws(ack, body, client, logger):
             cursor.execute(TAKEDOWNS_UPDATE_ASSIGNMENT, (person[0], min_key, min_key, person[0]))
             conn.commit()
     df = pd.read_sql_query(TAKEDOWN_DISPLAY, conn)
-    df.to_csv('test.csv', index=False)
-    rep = client.files_upload_v2(
+    df.to_csv('weekly_takedowns.csv', index=False)
+    response = client.files_upload_v2(
     channel="C0684CN6V6U",
-    file="test.csv",
-    title="Test upload",
-    initial_comment="Here is the latest version of the file!",
-)
-    response = client.chat_postMessage(
-        channel="C0684CN6V6U",
-        text='hi'
+    file="weekly_takedowns.csv",
+    title="Takedowns",
+    initial_comment="Here are the assignments for this weeks takedowns:",
     )
 
 
