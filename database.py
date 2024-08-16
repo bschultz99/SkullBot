@@ -154,3 +154,11 @@ LEFT JOIN takedowns_weekly
 ON users.slack_id = takedowns_weekly.slack_id
 WHERE takedowns_weekly.assignment LIKE %s;
 '''
+
+# ADMIN PORTAL
+
+POSITIONS_INSERT = '''
+INSERT INTO positions(position)
+VALUES (%s)
+ON CONFLICT (position) DO NOTHING;
+'''

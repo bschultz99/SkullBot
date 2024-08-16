@@ -14,7 +14,8 @@ from database import (USER_TABLE,
                       TAKEDOWNS_ALL_SELECT,
                       TAKEDOWN_DISPLAY,
                       TAKEDOWNS_CHANNEL_INSERT,
-                      TAKEDOWNS_SELECT_MEMBERS)
+                      TAKEDOWNS_SELECT_MEMBERS,
+                      POSITIONS_INSERT)
 import os, logging, psycopg2
 import pandas as pd
 
@@ -30,6 +31,11 @@ app = App(
    # logger.debug(body)
    # next()
 
+def add_positions():
+    positions = ['bot','Bryant','Theta-1','Theta-2','Theta-3']
+    for position in positions:
+        cursor.execute(POSITIONS_INSERT, (position,))
+        conn.commit()
 
 def generate_options(options):
     return [
@@ -231,13 +237,13 @@ def generate_takedonws(ack, body, client, logger):
         'friday_lunch': 'C05PG5PPS2C',
         'friday_dinner': 'C05NSBGBHT5' 
     }
-    theta_one = 'U02DTE5UUM7'
+    theta_three = 'U02DTE5UUM7'
     for takedown_slot, channel_id in takedown_channels.items():
         cursor.execute(TAKEDOWNS_CHANNEL_INSERT, (takedown_slot, channel_id))
         conn.commit()
         resp = client.conversations_members(channel = channel_id)
         for member in resp['members']:
-            if member == 'U067TRDET4Z' or member == 'UCQMZA62E' or member == theta_one:
+            if member == 'U067TRDET4Z' or member == 'UCQMZA62E' or member == theta_three:
                 print(member)
             else:
                 client.conversations_kick(channel= channel_id, user=member)
@@ -249,12 +255,10 @@ def generate_takedonws(ack, body, client, logger):
             except SlackApiError as e:
                 print(e)
         try:
-            client.conversations_invite(channel = channel_id, users=theta_one)
+            client.conversations_invite(channel = channel_id, users=theta_three)
         except SlackApiError as e:
                 print(e)
         client.chat_postMessage(channel=channel_id, text=f"Your takedown for the week is {takedown_slot}")
-
-
 
 
 
@@ -267,4 +271,5 @@ if __name__ == '__main__':
     cursor = conn.cursor()
     cursor.execute(USER_TABLE)
     conn.commit()
+    add_positions()
     app.start(3000)
