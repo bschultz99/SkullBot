@@ -239,7 +239,7 @@ def generate_takedonws(ack, body, client, logger):
                 print(member)
             else:
                 client.conversations_kick(channel= channel_id, user=member)
-        cursor.execute(TAKEDOWNS_SELECT_MEMBERS, (takedown_slot,))
+        cursor.execute(TAKEDOWNS_SELECT_MEMBERS, (f"%{takedown_slot}%",))
         print(cursor.fetchall())
 
 

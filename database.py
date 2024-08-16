@@ -148,5 +148,5 @@ SELECT users.slack_id
 FROM users
 LEFT JOIN takedowns_weekly
 ON users.slack_id = takedowns_weekly.slack_id
-WHERE takedowns_weekly.assignment = ANY(%s);
+WHERE takedowns_weekly.assignment LIKE %s;
 '''
