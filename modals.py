@@ -227,3 +227,34 @@ REMOVE_USER = {
 		}
 	]
 }
+
+ADD_ADMIN_USER = {
+	"title": {
+		"type": "plain_text",
+		"text": "Admin Portal"
+	},
+	"submit": {
+		"type": "plain_text",
+		"text": "Submit"
+	},
+	"type": "modal",
+	"callback_id": "remove-user-modal",
+	"blocks": [
+		{
+			"type": "section",
+			"text": {
+				"type": "mrkdwn",
+				"text": "Pick an item from the dropdown list"
+			},
+			"accessory": {
+				"type": "static_select",
+				"placeholder": {
+					"type": "plain_text",
+					"text": "Select an item"
+				},
+				"options": [],
+				"action_id": "null-action"
+			}
+		}
+	]
+}
