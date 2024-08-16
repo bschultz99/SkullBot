@@ -232,7 +232,7 @@ def generate_takedonws(ack, body, client, logger):
     for takedown_slot, channel_id in takedown_channels.items():
         cursor.execute(TAKEDOWNS_CHANNEL_INSERT, (takedown_slot, channel_id))
         conn.commit()
-        resp = client.conversations_members(channel_id)
+        resp = client.conversations_members(channel = channel_id)
         print(resp['members'])
 
 
