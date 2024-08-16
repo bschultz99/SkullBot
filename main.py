@@ -212,7 +212,7 @@ def generate_takedonws(ack, body, client, logger):
     response = client.files_upload(
         chanels= 'C0684CN6V6U',
         file = 'test.csv',
-        title= 'Takedowns'
+        title= 'Takedowns',
         inital_comment= 'Hi:'
     )
 
