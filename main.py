@@ -10,8 +10,10 @@ from database import (USER_TABLE,
                       TAKEDOWNS_SUM_COUNT,
                       TAKEDOWNS_ACTIVE_SELECT,
                       TAKEDOWNS_UPDATE_ASSIGNMENT,
-                      TAKEDOWNS_ALL_SELECT)
+                      TAKEDOWNS_ALL_SELECT,
+                      TAKEDOWN_DISPLAY)
 import os, logging, psycopg2
+import pandas as pd
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -206,6 +208,14 @@ def generate_takedonws(ack, body, client, logger):
             person = cursor.fetchone()
             cursor.execute(TAKEDOWNS_UPDATE_ASSIGNMENT, (person[0], min_key, person[0]))
             conn.commit()
+    df = pd.to_csv('test.csv', index=False)
+    response = client.files_upload(
+        chanels= 'C0684CN6V6U',
+        file = 'test.csv',
+        title= 'Takedowns'
+        inital_comment= 'Hi:'
+    )
+
 
 
 if __name__ == '__main__':
@@ -218,4 +228,3 @@ if __name__ == '__main__':
     cursor.execute(USER_TABLE)
     conn.commit()
     app.start(3000)
-    print("hi")
