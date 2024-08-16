@@ -249,7 +249,7 @@ def generate_takedonws(ack, body, client, logger):
             except SlackApiError as e:
                 print(e)
         client.conversations_invite(channel = channel_id, users=theta_one)
-        client.chat_postMessage(channel=channel_id, text="Hi Ronan")
+        client.chat_postMessage(channel=channel_id, text="Your takedown for the week is {takedown_slot}")
 
 
 
