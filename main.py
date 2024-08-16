@@ -271,5 +271,7 @@ if __name__ == '__main__':
     cursor = conn.cursor()
     cursor.execute(USER_TABLE)
     conn.commit()
+    cursor.execute('DROP TABLE positions;')
+    conn.commit()
     add_positions()
     app.start(3000)

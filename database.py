@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS takedown_channels (
     channel_id VARCHAR(255)
     );
 CREATE TABLE IF NOT EXISTS positions (
-    positions VARCHAR(255) PRIMARY KEY,
+    position VARCHAR(255) PRIMARY KEY,
     slack_id VARCHAR(255)
     ); 
 """
