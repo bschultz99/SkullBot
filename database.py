@@ -85,6 +85,15 @@ AND takedowns.{} = TRUE
 ORDER BY takedowns.takedown_count;
 '''
 
+TAKEDOWNS_ALL_SELECT = '''
+SELECT takedowns.* 
+FROM takedowns 
+INNER JOIN users
+ON users.slack_id = takedowns.slack_id
+WHERE takedowns.{} = TRUE
+ORDER BY takedowns.takedown_count;
+'''
+
 TAKEDOWN_MEMBER_COUNT = '''
 SELECT COUNT(*) as total_entries FROM takedowns;
 '''
