@@ -211,10 +211,10 @@ def generate_takedonws(ack, body, client, logger):
     df = pd.read_sql_query(TAKEDOWN_DISPLAY, conn)
     df.to_csv('weekly_takedowns.csv', index=False)
     response = client.files_upload_v2(
-    channel="C0684CN6V6U",
-    file="weekly_takedowns.csv",
-    title="Takedowns",
-    initial_comment="Here are the assignments for this weeks takedowns:",
+        channel="C0684CN6V6U",
+        file="weekly_takedowns.csv",
+        title="Takedowns",
+        initial_comment="Here are the assignments for this weeks takedowns:",
     )
 
 
