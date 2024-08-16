@@ -210,7 +210,7 @@ def generate_takedonws(ack, body, client, logger):
             conn.commit()
     df = pd.read_sql_query(TAKEDOWN_DISPLAY, conn)
     df.to_csv('test.csv', index=False)
-    response = client.files_upload(
+    response = client.files_upload_v2(
         chanels= 'C0684CN6V6U',
         file = 'test.csv',
         title= 'Takedowns',
