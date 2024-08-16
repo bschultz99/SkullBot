@@ -118,7 +118,10 @@ UPDATE takedowns
 SET takedown_count = takedown_count + 1
 WHERE slack_id = %s;
 UPDATE takedowns_weekly
-SET assignment = assignment || ',' || %s
+SET assignment = CASE
+WHEN assignment = '' THEN %s
+ELSE assignment || ',' || %s
+END
 WHERE slack_id = %s;
 '''
 
