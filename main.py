@@ -208,7 +208,8 @@ def generate_takedonws(ack, body, client, logger):
             person = cursor.fetchone()
             cursor.execute(TAKEDOWNS_UPDATE_ASSIGNMENT, (person[0], min_key, person[0]))
             conn.commit()
-    df = pd.to_csv('test.csv', index=False)
+    df = pd.read_sql_query(TAKEDOWN_DISPLAY, conn)
+    df.to_csv('test.csv', index=False)
     response = client.files_upload(
         chanels= 'C0684CN6V6U',
         file = 'test.csv',
