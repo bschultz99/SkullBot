@@ -233,7 +233,11 @@ def generate_takedonws(ack, body, client, logger):
         cursor.execute(TAKEDOWNS_CHANNEL_INSERT, (takedown_slot, channel_id))
         conn.commit()
         resp = client.conversations_members(channel = channel_id)
-        print(resp['members'])
+        for member in resp['members']:
+            if member == 'U067TRDET4Z' or member == 'UCQMZA62E':
+                print(member)
+            else:
+                client.conversations_kick(channel= channel_id, user=member)
 
 
 
