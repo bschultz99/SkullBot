@@ -11,7 +11,8 @@ from database import (USER_TABLE,
                       TAKEDOWNS_ACTIVE_SELECT,
                       TAKEDOWNS_UPDATE_ASSIGNMENT,
                       TAKEDOWNS_ALL_SELECT,
-                      TAKEDOWN_DISPLAY)
+                      TAKEDOWN_DISPLAY,
+                      TAKEDOWNS_CHANNEL_INSERT)
 import os, logging, psycopg2
 import pandas as pd
 
@@ -216,6 +217,21 @@ def generate_takedonws(ack, body, client, logger):
         title="Takedowns",
         initial_comment="Here are the assignments for this weeks takedowns:",
     )
+    takedown_channels = {
+        'monday_lunch': 'C05NUTE6HC4',
+        'monday_dinner': 'C05P53KDX7B',
+        'tuesday_lunch': 'C05NKQWH3HC',
+        'tuesday_dinner': 'C05NKQWK7EJ',
+        'wednesday_lunch': 'C05NKQWMEGN',
+        'wednesday_dinner': 'C05NPGXSZL5',
+        'thursday_lunch': 'C05P53KQTUH',
+        'thursday_dinner': 'C05NKQWTQA2',
+        'friday_lunch': 'C05PG5PPS2C',
+        'friday_dinner': 'C05NSBGBHT5' 
+    }
+    for takedown_slot, channel_id in takedown_channels.items():
+        cursor.execute(TAKEDOWNS_CHANNEL_INSERT, (takedown_slot, channel_id))
+        conn.commit()
 
 
 

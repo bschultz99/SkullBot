@@ -20,6 +20,10 @@ CREATE TABLE IF NOT EXISTS takedowns (
     friday_lunch BOOLEAN DEFAULT FALSE,
     friday_dinner BOOLEAN DEFAULT FALSE
     );
+CREATE TABLE IF NOT EXISTS takedown_channels (
+    takedown_slot VARCHAR(255) PRIMARY KEY,
+    channel_id VARCHAR(255)
+    );
 """
 
 TAKEDOWN_INSERT = '''
@@ -130,4 +134,11 @@ SELECT users.name, takedowns_weekly.assignment
 FROM takedowns_weekly
 INNER JOIN users
 ON users.slack_id = takedowns_weekly.slack_id;
+'''
+
+TAKEDOWNS_CHANNEL_INSERT = '''
+INSERT INTO takedown_channels (takedown_slot, channel_id)
+VALUES (%s, %s)
+ON CONFLICT (takedown_slot) DO UPDATE
+SET channel_id = EXCLUDED.channel_id;
 '''
