@@ -210,11 +210,12 @@ def generate_takedonws(ack, body, client, logger):
             conn.commit()
     df = pd.read_sql_query(TAKEDOWN_DISPLAY, conn)
     df.to_csv('test.csv', index=False)
-    response = client.post_message(
+    response = client.chat_postMessage(
         chanels="C0684CN6V6U",
         test='hi'
     )
     print(response)
+    client
 
 
 
