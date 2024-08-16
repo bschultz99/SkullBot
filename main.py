@@ -1,4 +1,5 @@
 from slack_bolt import App
+from slack_sdk.errors import SlackApiError
 from modals import USER_PORTAL, ADMIN_PORTAL, REMOVE_USER
 from database import (USER_TABLE,
                       USER_INSERT,
@@ -239,8 +240,13 @@ def generate_takedonws(ack, body, client, logger):
                 print(member)
             else:
                 client.conversations_kick(channel= channel_id, user=member)
-        cursor.execute(TAKEDOWNS_SELECT_MEMBERS, (f"%{takedown_slot}%",))
-        print(cursor.fetchall())
+        members = cursor.execute(TAKEDOWNS_SELECT_MEMBERS, (f"%{takedown_slot}%",))
+        for member in members:
+            try:
+                client.conversations_invite(channel = channel_id, users=member)
+            except SlackApiError as e:
+                print(e)
+
 
 
 
