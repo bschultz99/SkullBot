@@ -218,3 +218,4 @@ if __name__ == '__main__':
     cursor.execute(USER_TABLE)
     conn.commit()
     app.start(3000)
+    print("hi")
