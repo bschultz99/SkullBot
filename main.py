@@ -231,12 +231,13 @@ def generate_takedonws(ack, body, client, logger):
         'friday_lunch': 'C05PG5PPS2C',
         'friday_dinner': 'C05NSBGBHT5' 
     }
+    theta_one = 'U02DTE5UUM7'
     for takedown_slot, channel_id in takedown_channels.items():
         cursor.execute(TAKEDOWNS_CHANNEL_INSERT, (takedown_slot, channel_id))
         conn.commit()
         resp = client.conversations_members(channel = channel_id)
         for member in resp['members']:
-            if member == 'U067TRDET4Z' or member == 'UCQMZA62E':
+            if member == 'U067TRDET4Z' or member == 'UCQMZA62E' or member == theta_one:
                 print(member)
             else:
                 client.conversations_kick(channel= channel_id, user=member)
@@ -247,6 +248,8 @@ def generate_takedonws(ack, body, client, logger):
                 client.conversations_invite(channel = channel_id, users=member)
             except SlackApiError as e:
                 print(e)
+        client.conversations_invite(channel = channel_id, users=theta_one)
+        client.chat_postMessage(channel=channel_id, text="Hi Ronan")
 
 
 
