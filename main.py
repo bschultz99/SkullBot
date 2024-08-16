@@ -212,7 +212,7 @@ def generate_takedonws(ack, body, client, logger):
     df.to_csv('test.csv', index=False)
     response = client.files_upload_v2(
         chanels="C0684CN6V6U",
-        file ="test.csv",
+        file ="test.jpg",
         title="Takedowns",
         inital_comment="Hi"
     )
