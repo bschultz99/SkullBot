@@ -1,6 +1,6 @@
 from slack_bolt import App
 from slack_sdk.errors import SlackApiError
-from modals import USER_PORTAL, ADMIN_PORTAL, REMOVE_USER
+from modals import USER_PORTAL, ADMIN_PORTAL, REMOVE_USER, ADD_ADMIN_USER
 from database import (USER_TABLE,
                       USER_INSERT,
                       SELECT_ALL_USERS,
@@ -32,7 +32,7 @@ app = App(
    # next()
 
 def add_positions():
-    positions = ['bot','Bryant','Theta-1','Theta-2','Theta-3']
+    positions = ['Bot','Bryant','Theta-1','Theta-2','Theta-3']
     for position in positions:
         cursor.execute(POSITIONS_INSERT, (position,))
         conn.commit()
@@ -110,11 +110,24 @@ def view_submission(ack, body, client, logger):
 @app.view("remove-user-modal")
 def remove_user(ack, body, client, logger):
     ack()
+    slack_id = body['view']['blocks'][0]['accessory']['options'][0]['value']
+    cursor.execute(REMOVE_SELECTED_USER, (slack_id,))
+    conn.commit()
 
 # Modal Reponse Ack
 @app.action("null-action")
 def buttons(ack):
     ack()
+
+@app.action("add-admin")
+def add_admin(ack, body, client, logger):
+    ack()
+    logger.info(body)
+    view_id = body['container']['view_id']
+    modal = ADD_ADMIN_USER.copy()
+    cursor.execute(SELECT_ALL_USERS)
+    modal["blocks"][0]["accessory"]["options"] = generate_options((cursor.fetchall()))
+    res = client.views_update(view_id=view_id, view=str(modal))
 
 #Display Remove Users Screen
 @app.action("remove-user")
@@ -126,9 +139,6 @@ def remove_user_action(ack, body, client, logger):
     modal = REMOVE_USER.copy()
     modal["blocks"][0]["accessory"]["options"] = generate_options((cursor.fetchall()))
     res = client.views_update(view_id=view_id, view=str(modal))
-    slack_id = res['view']['blocks'][0]['accessory']['options'][0]['value']
-    cursor.execute(REMOVE_SELECTED_USER, (slack_id,))
-    conn.commit()
 
 @app.action("insert-data")
 def insert_data(ack, body, client, logger):

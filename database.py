@@ -162,3 +162,10 @@ INSERT INTO positions(position)
 VALUES (%s)
 ON CONFLICT (position) DO NOTHING;
 '''
+
+POSITIONS_SLACK_INSERT = '''
+INSERT INTO positions(slack_id)
+VALUES (%s)
+ON CONFLICT (position) DO UPDATE
+SET slack_id = EXCLUDED.slack_id;  
+'''

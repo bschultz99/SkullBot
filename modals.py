@@ -182,6 +182,15 @@ ADMIN_PORTAL = {
 					},
 					"value": "insert-data",
 					"action_id": "insert-data"
+				},
+                {
+					"type": "button",
+					"text": {
+						"type": "plain_text",
+						"text": "Add admin"
+					},
+					"value": "add-admin",
+					"action_id": "add-admin"
 				}
 			]
 		}
