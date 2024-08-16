@@ -142,3 +142,11 @@ VALUES (%s, %s)
 ON CONFLICT (takedown_slot) DO UPDATE
 SET channel_id = EXCLUDED.channel_id;
 '''
+
+TAKEDOWNS_SELECT_MEMBERS = '''
+SELECT users.slack_id 
+FROM users u
+LEFT JOIN takedowns_weekly
+ON users.slack_id = takedowns_weekly.slack_id
+WHERE takedowns_weekly.assignment IN %s;
+'''

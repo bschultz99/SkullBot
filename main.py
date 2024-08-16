@@ -12,7 +12,8 @@ from database import (USER_TABLE,
                       TAKEDOWNS_UPDATE_ASSIGNMENT,
                       TAKEDOWNS_ALL_SELECT,
                       TAKEDOWN_DISPLAY,
-                      TAKEDOWNS_CHANNEL_INSERT)
+                      TAKEDOWNS_CHANNEL_INSERT,
+                      TAKEDOWNS_SELECT_MEMBERS)
 import os, logging, psycopg2
 import pandas as pd
 
@@ -238,6 +239,8 @@ def generate_takedonws(ack, body, client, logger):
                 print(member)
             else:
                 client.conversations_kick(channel= channel_id, user=member)
+        cursor.execute(TAKEDOWNS_SELECT_MEMBERS, (takedown_slot,))
+        print(cursor.fetchall())
 
 
 
