@@ -216,6 +216,7 @@ def generate_takedonws(ack, body, client, logger):
         title="Takedowns",
         inital_comment="Hi"
     )
+    print(response)
 
 
 
