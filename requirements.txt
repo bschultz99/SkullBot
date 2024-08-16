@@ -4,3 +4,4 @@ slackclient==2.9.4
 slackeventsapi==3.0.1
 psycopg2==2.9.9
 slack_bolt==1.19.1
+pandas==2.2.2
