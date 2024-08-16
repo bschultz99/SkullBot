@@ -240,7 +240,8 @@ def generate_takedonws(ack, body, client, logger):
                 print(member)
             else:
                 client.conversations_kick(channel= channel_id, user=member)
-        members = cursor.execute(TAKEDOWNS_SELECT_MEMBERS, (f"%{takedown_slot}%",))
+        cursor.execute(TAKEDOWNS_SELECT_MEMBERS, (f"%{takedown_slot}%",))
+        members = cursor.fetchall()
         for member in members:
             try:
                 client.conversations_invite(channel = channel_id, users=member)
