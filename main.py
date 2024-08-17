@@ -111,8 +111,9 @@ def view_submission(ack, body, client, logger):
 def remove_user(ack, body, client, logger):
     ack()
     slack_id = body['view']['blocks'][0]['accessory']['options'][0]['value']
-    print(body['view']['state'])
-    print(slack_id)
+    for key, value in body['view']['state']['values'].items():
+        if 'null-action' in value:
+            print(value['null-action']['selected_option'])
     #cursor.execute(REMOVE_SELECTED_USER, (slack_id,))
     #conn.commit()
 
