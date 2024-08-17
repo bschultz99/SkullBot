@@ -1,5 +1,7 @@
 from slack_bolt import App
 from slack_sdk.errors import SlackApiError
+import os, logging, psycopg2
+import pandas as pd
 from modals import USER_PORTAL, ADMIN_PORTAL, REMOVE_USER, ADD_ADMIN_USER
 from database import (USER_TABLE,
                       USER_INSERT,
@@ -18,8 +20,6 @@ from database import (USER_TABLE,
                       POSITIONS_SLACK_INSERT,
                       THETA_THREE_SELECT,
                       ADMIN_CHECK)
-import os, logging, psycopg2
-import pandas as pd
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -27,11 +27,6 @@ app = App(
     token = os.getenv('SLACK_BOT_TOKEN'),
     signing_secret = os.getenv('SLACK_SIGNING_SECRET'),
 )
-
-#@app.middleware
-#def log_request(logger, body, next):
-   # logger.debug(body)
-   # next()
 
 def generate_options(options):
     return [
@@ -59,14 +54,6 @@ def takedown_availability(input):
     return takedowns
 
 # Commands
-@app.command("/skull-help")
-def helpform(body, ack, client, logger):
-    """Help Slack Command"""
-    logger.info(body)
-    ack()
-    res = client.views_open(trigger_id=body["trigger_id"], view=USER_PORTAL)
-    logger.info(res)
-
 @app.command("/user-portal")
 def user_portal(body, ack, client, logger):
     """User Portal"""
@@ -157,20 +144,20 @@ def insert_data(ack, body, client, logger):
     ack()
     users = [('1','1', 'IH-2'),
              ('2','2', 'IH-2'),
-             ('3','3', 'IH-2'),
+             ('3','3', 'IH-3'),
              ('4','4', 'IH-2'),
-             ('5','5', 'IH-2'),
+             ('5','5', 'IH-3'),
              ('6','6', 'IH-2'),
-             ('7','7', 'IH-2'),
-             ('8','8', 'IH-2'),
-             ('9','9', 'IH-2'),
-             ('10','10', 'IH-2'),
-             ('11','11', 'IH-2'),
-             ('12','12', 'IH-2'),
-             ('13','13', 'IH-2'),
-             ('14','14', 'IH-2'),
-             ('15','15', 'IH-2'),
-             ('16','16', 'IH-2'),]
+             ('7','7', 'IH-3'),
+             ('8','8', 'IH-3'),
+             ('9','9', 'IH-3'),
+             ('10','10', 'IH-3'),
+             ('11','11', 'IH-3'),
+             ('12','12', 'NM'),
+             ('13','13', 'NM'),
+             ('14','14', 'TM'),
+             ('15','15', 'TM'),
+             ('16','16', 'NM'),]
     takedowns = [('1', [True, False, True, False, True, False, True, False, False, False]),
                  ('2', [False, True, True, True, False, False, False, False, True, True]),
                  ('3', [True, False, False, False, False, False, False, True, False, False]),
@@ -282,8 +269,6 @@ def generate_takedonws(ack, body, client, logger):
         except SlackApiError as e:
                 print(e)
         client.chat_postMessage(channel=channel_id, text=f"Your takedown for the week is {takedown_slot}")
-
-
 
 if __name__ == '__main__':
     conn = psycopg2.connect(database=os.getenv("PGDATABASE"),
