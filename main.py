@@ -123,7 +123,7 @@ def add_admin_modal(ack, body, client, logger):
     values = ()
     for _, value in body['view']['state']['values'].items():
         if 'null-action' in value:
-            values += (value['null-action']['selected_option']['value'])
+            values += ((value['null-action']['selected_option']['value']),)
     cursor.execute(POSITIONS_SLACK_INSERT, values)
 
 # Modal Reponse Ack
