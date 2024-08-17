@@ -185,7 +185,7 @@ ADMIN_PORTAL = {
 			"type": "section",
 			"text": {
 				"type": "plain_text",
-				"text": "Hello"
+				"text": "Hello, if you have any questions please reach out to Bryant. He would prefer to be bugged than for something to break."
 			}
 		},
 		{
@@ -204,7 +204,7 @@ ADMIN_PORTAL = {
 					"type": "button",
 					"text": {
 						"type": "plain_text",
-						"text": "Generate Takedonws"
+						"text": "Generate Takedowns"
 					},
 					"value": "generate-takedowns",
 					"action_id": "generate-takedowns"
@@ -235,7 +235,7 @@ ADMIN_PORTAL = {
 REMOVE_USER = {
 	"title": {
 		"type": "plain_text",
-		"text": "Admin Portal"
+		"text": "Remove User Portal"
 	},
 	"submit": {
 		"type": "plain_text",
@@ -248,13 +248,13 @@ REMOVE_USER = {
 			"type": "section",
 			"text": {
 				"type": "mrkdwn",
-				"text": "Pick an item from the dropdown list"
+				"text": "Please pick a member to remove from the system:"
 			},
 			"accessory": {
 				"type": "static_select",
 				"placeholder": {
 					"type": "plain_text",
-					"text": "Select an item"
+					"text": "Select a user"
 				},
 				"options": [],
 				"action_id": "null-action"
@@ -266,7 +266,7 @@ REMOVE_USER = {
 ADD_ADMIN_USER = {
 	"title": {
 		"type": "plain_text",
-		"text": "Admin Portal"
+		"text": "Add Admin Portal"
 	},
 	"submit": {
 		"type": "plain_text",
@@ -279,13 +279,13 @@ ADD_ADMIN_USER = {
 			"type": "section",
 			"text": {
 				"type": "mrkdwn",
-				"text": "Pick an item from the dropdown list"
+				"text": "Please pick a user for the position:"
 			},
 			"accessory": {
 				"type": "static_select",
 				"placeholder": {
 					"type": "plain_text",
-					"text": "Select an item"
+					"text": "Select a user"
 				},
 				"options": [],
 				"action_id": "null-action"
@@ -295,13 +295,13 @@ ADD_ADMIN_USER = {
 			"type": "section",
 			"text": {
 				"type": "mrkdwn",
-				"text": "Pick a position."
+				"text": "Please pick a position for the user:"
 			},
 			"accessory": {
 				"type": "static_select",
 				"placeholder": {
 					"type": "plain_text",
-					"text": "Select an item"
+					"text": "Select a position"
 				},
 				"options": [
                     {

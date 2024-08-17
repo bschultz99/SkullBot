@@ -113,7 +113,7 @@ def add_admin_modal(ack, body, client, logger):
     cursor.execute(POSITIONS_SLACK_INSERT, values)
     conn.commit()
 
-# Modal Reponse Ack
+# Modal Response Ack
 @app.action("null-action")
 def buttons(ack):
     ack()
@@ -184,7 +184,7 @@ def insert_data(ack, body, client, logger):
 
 # Execute Takedown Generation
 @app.action("generate-takedowns")
-def generate_takedonws(ack, body, client, logger):
+def generate_takedowns(ack, body, client, logger):
     ack()
     logger.info(body)
     view_id = body['container']['view_id']
