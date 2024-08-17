@@ -158,7 +158,7 @@ WHERE takedowns_weekly.assignment LIKE %s;
 THETA_THREE_SELECT = '''
 SELECT slack_id
 FROM positions
-WHERE position = "Theta-3";
+WHERE position = Theta-3;
 '''
 
 # ADMIN PORTAL
