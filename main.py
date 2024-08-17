@@ -110,12 +110,11 @@ def view_submission(ack, body, client, logger):
 @app.view("remove-user-modal")
 def remove_user(ack, body, client, logger):
     ack()
-    slack_id = body['view']['blocks'][0]['accessory']['options'][0]['value']
-    for key, value in body['view']['state']['values'].items():
+    for _, value in body['view']['state']['values'].items():
         if 'null-action' in value:
-            print(value['null-action']['selected_option']['value'])
-    #cursor.execute(REMOVE_SELECTED_USER, (slack_id,))
-    #conn.commit()
+            slack_id = value['null-action']['selected_option']['value']
+    cursor.execute(REMOVE_SELECTED_USER, (slack_id,))
+    conn.commit()
 
 # Modal Reponse Ack
 @app.action("null-action")
