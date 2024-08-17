@@ -15,7 +15,8 @@ from database import (USER_TABLE,
                       TAKEDOWN_DISPLAY,
                       TAKEDOWNS_CHANNEL_INSERT,
                       TAKEDOWNS_SELECT_MEMBERS,
-                      POSITIONS_SLACK_INSERT)
+                      POSITIONS_SLACK_INSERT,
+                      THETA_THREE_SELECT)
 import os, logging, psycopg2
 import pandas as pd
 
@@ -253,7 +254,9 @@ def generate_takedonws(ack, body, client, logger):
         'friday_lunch': 'C05PG5PPS2C',
         'friday_dinner': 'C05NSBGBHT5' 
     }
-    theta_three = 'U02DTE5UUM7'
+    cursor.execute(THETA_THREE_SELECT)
+    theta_three = cursor.fetchone()
+    print(theta_three)
     for takedown_slot, channel_id in takedown_channels.items():
         cursor.execute(TAKEDOWNS_CHANNEL_INSERT, (takedown_slot, channel_id))
         conn.commit()

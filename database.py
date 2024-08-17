@@ -155,6 +155,12 @@ ON users.slack_id = takedowns_weekly.slack_id
 WHERE takedowns_weekly.assignment LIKE %s;
 '''
 
+THETA_THREE_SELECT = '''
+SELECT slack_id
+FROM positions
+WHERE position = "Theta-3";
+'''
+
 # ADMIN PORTAL
 
 POSITIONS_SLACK_INSERT = '''
