@@ -91,12 +91,26 @@ USER_PORTAL = {
 						},
 						"value": "ML"
 					},
+                    {
+						"text": {
+							"type": "plain_text",
+							"text": "Monday Dinner"
+						},
+						"value": "MD"
+					},
 					{
 						"text": {
 							"type": "plain_text",
 							"text": "Tuesday Lunch"
 						},
 						"value": "TL"
+					},
+                    {
+						"text": {
+							"type": "plain_text",
+							"text": "Tuesday Dinner"
+						},
+						"value": "TD"
 					},
 					{
 						"text": {
@@ -105,6 +119,13 @@ USER_PORTAL = {
 						},
 						"value": "WL"
 					},
+                    {
+						"text": {
+							"type": "plain_text",
+							"text": "Wednesday Dinner"
+						},
+						"value": "WD"
+					},
 					{
 						"text": {
 							"type": "plain_text",
@@ -112,12 +133,26 @@ USER_PORTAL = {
 						},
 						"value": "HL"
 					},
+                    {
+						"text": {
+							"type": "plain_text",
+							"text": "Thursday Dinner"
+						},
+						"value": "HD"
+					},
 					{
 						"text": {
 							"type": "plain_text",
 							"text": "Friday Lunch"
 						},
 						"value": "FL"
+					},
+                    {
+						"text": {
+							"type": "plain_text",
+							"text": "Friday Dinner"
+						},
+						"value": "FD"
 					}
 				],
 				"action_id": "null-action"
