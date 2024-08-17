@@ -120,11 +120,11 @@ def remove_user(ack, body, client, logger):
 @app.view("add-admin-modal")
 def add_admin_modal(ack, body, client, logger):
     ack()
-    values = []
+    values = ()
     for _, value in body['view']['state']['values'].items():
         if 'null-action' in value:
-            values.append(value['null-action']['selected_option']['value'])
-    cursor.execute(POSITIONS_SLACK_INSERT, *values)
+            values += (value['null-action']['selected_option']['value'])
+    cursor.execute(POSITIONS_SLACK_INSERT, values)
 
 # Modal Reponse Ack
 @app.action("null-action")
