@@ -125,6 +125,7 @@ def add_admin_modal(ack, body, client, logger):
         if 'null-action' in value:
             values += ((value['null-action']['selected_option']['value']),)
     cursor.execute(POSITIONS_SLACK_INSERT, values)
+    conn.commit()
 
 # Modal Reponse Ack
 @app.action("null-action")
