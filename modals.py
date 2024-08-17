@@ -274,21 +274,21 @@ ADD_ADMIN_USER = {
 							"type": "plain_text",
 							"text": "Theta-1"
 						},
-						"value": "theta-1"
+						"value": "Theta-1"
 					},
 					{
 						"text": {
 							"type": "plain_text",
 							"text": "Theta-2"
 						},
-						"value": "theta-2"
+						"value": "Theta-2"
 					},
 					{
 						"text": {
 							"type": "plain_text",
 							"text": "Theta-3"
 						},
-						"value": "theta-3"
+						"value": "Theta-3"
 					}],
 				"action_id": "null-action"
 			}

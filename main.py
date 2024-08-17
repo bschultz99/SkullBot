@@ -15,7 +15,6 @@ from database import (USER_TABLE,
                       TAKEDOWN_DISPLAY,
                       TAKEDOWNS_CHANNEL_INSERT,
                       TAKEDOWNS_SELECT_MEMBERS,
-                      POSITIONS_INSERT,
                       POSITIONS_SLACK_INSERT)
 import os, logging, psycopg2
 import pandas as pd
@@ -31,12 +30,6 @@ app = App(
 #def log_request(logger, body, next):
    # logger.debug(body)
    # next()
-
-def add_positions():
-    positions = ['Bot','Bryant','Theta-1','Theta-2','Theta-3']
-    for position in positions:
-        cursor.execute(POSITIONS_INSERT, (position,))
-        conn.commit()
 
 def generate_options(options):
     return [
@@ -294,5 +287,4 @@ if __name__ == '__main__':
     cursor = conn.cursor()
     cursor.execute(USER_TABLE)
     conn.commit()
-    add_positions()
     app.start(3000)

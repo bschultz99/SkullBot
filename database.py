@@ -157,12 +157,6 @@ WHERE takedowns_weekly.assignment LIKE %s;
 
 # ADMIN PORTAL
 
-POSITIONS_INSERT = '''
-INSERT INTO positions(position)
-VALUES (%s)
-ON CONFLICT (position) DO NOTHING;
-'''
-
 POSITIONS_SLACK_INSERT = '''
 INSERT INTO positions(slack_id, position)
 VALUES (%s, %s)
