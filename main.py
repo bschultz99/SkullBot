@@ -228,7 +228,7 @@ def generate_takedowns(ack, body, client, logger):
             conn.commit()
     df = pd.read_sql_query(TAKEDOWN_DISPLAY, conn)
     df.to_csv('weekly_takedowns.csv', index=False)
-    response = client.files_upload_v2(
+    client.files_upload_v2(
         channel="C0684CN6V6U",
         file="weekly_takedowns.csv",
         title="Takedowns",
@@ -269,13 +269,13 @@ def generate_takedowns(ack, body, client, logger):
         except SlackApiError as e:
                 print(e)
         client.chat_postMessage(channel=channel_id, text=f"Your takedown for the week is {takedown_slot}")
-    response = client.views_update(
+    client.views_update(
             view_id=view_id,
             view={
                 "type": "modal",
                 "title": {
                     "type": "plain_text",
-                    "text": "Modal Closed"
+                    "text": "Takedowns Generated"
                 },
                 "blocks": []
             }
