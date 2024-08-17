@@ -82,9 +82,10 @@ def admin_portal(body, ack, client, logger):
     logger.info(body)
     user_id = body['user_id']
     cursor.execute(ADMIN_CHECK, (user_id,))
-    print(cursor.fetchone())
-    res = client.views_open(trigger_id=body["trigger_id"], view=ADMIN_PORTAL)
-    logger.info(res)
+    count = cursor.fetchone()
+    if count > 0:
+        res = client.views_open(trigger_id=body["trigger_id"], view=ADMIN_PORTAL)
+        logger.info(res)
 
 # Modal View
 @app.view("user-portal-modal")
