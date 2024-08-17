@@ -116,6 +116,14 @@ def remove_user(ack, body, client, logger):
     cursor.execute(REMOVE_SELECTED_USER, (slack_id,))
     conn.commit()
 
+@app.view("add-admin-modal")
+def add_admin_modal(ack, body, client, logger):
+    ack()
+    for _, value in body['view']['state']['values'].items():
+        if 'null-action' in value:
+            slack_id = value['null-action']['selected_option']['value']
+            print(slack_id)
+
 # Modal Reponse Ack
 @app.action("null-action")
 def buttons(ack):

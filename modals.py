@@ -238,7 +238,7 @@ ADD_ADMIN_USER = {
 		"text": "Submit"
 	},
 	"type": "modal",
-	"callback_id": "remove-user-modal",
+	"callback_id": "add-admin-modal",
 	"blocks": [
 		{
 			"type": "section",
@@ -253,6 +253,43 @@ ADD_ADMIN_USER = {
 					"text": "Select an item"
 				},
 				"options": [],
+				"action_id": "null-action"
+			}
+		},
+        {
+			"type": "section",
+			"text": {
+				"type": "mrkdwn",
+				"text": "Pick a position."
+			},
+			"accessory": {
+				"type": "static_select",
+				"placeholder": {
+					"type": "plain_text",
+					"text": "Select an item"
+				},
+				"options": [
+                    {
+						"text": {
+							"type": "plain_text",
+							"text": "Theta-1"
+						},
+						"value": "theta-1"
+					},
+					{
+						"text": {
+							"type": "plain_text",
+							"text": "Theta-2"
+						},
+						"value": "theta-2"
+					},
+					{
+						"text": {
+							"type": "plain_text",
+							"text": "Theta-3"
+						},
+						"value": "theta-3"
+					}],
 				"action_id": "null-action"
 			}
 		}
