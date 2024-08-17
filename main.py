@@ -78,6 +78,7 @@ def user_portal(body, ack, client, logger):
 def admin_portal(body, ack, client, logger):
     """Admin Portal"""
     logger.info(body)
+    print(body)
     ack()
     res = client.views_open(trigger_id=body["trigger_id"], view=ADMIN_PORTAL)
     logger.info(res)
