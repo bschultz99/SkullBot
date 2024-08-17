@@ -255,8 +255,7 @@ def generate_takedonws(ack, body, client, logger):
         'friday_dinner': 'C05NSBGBHT5' 
     }
     cursor.execute(THETA_THREE_SELECT)
-    theta_three = cursor.fetchone()
-    print(theta_three)
+    theta_three = cursor.fetchone()[0]
     for takedown_slot, channel_id in takedown_channels.items():
         cursor.execute(TAKEDOWNS_CHANNEL_INSERT, (takedown_slot, channel_id))
         conn.commit()
