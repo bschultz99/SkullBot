@@ -171,6 +171,6 @@ SET slack_id = EXCLUDED.slack_id;
 '''
 
 ADMIN_CHECK = '''
-SELECT count(*) FROM postions
+SELECT count(*) FROM positions
 WHERE slack_id = %s;
 '''
