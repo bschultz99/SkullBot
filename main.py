@@ -15,7 +15,8 @@ from database import (USER_TABLE,
                       TAKEDOWN_DISPLAY,
                       TAKEDOWNS_CHANNEL_INSERT,
                       TAKEDOWNS_SELECT_MEMBERS,
-                      POSITIONS_INSERT)
+                      POSITIONS_INSERT,
+                      POSITIONS_SLACK_INSERT)
 import os, logging, psycopg2
 import pandas as pd
 
@@ -119,10 +120,11 @@ def remove_user(ack, body, client, logger):
 @app.view("add-admin-modal")
 def add_admin_modal(ack, body, client, logger):
     ack()
+    values = []
     for _, value in body['view']['state']['values'].items():
         if 'null-action' in value:
-            slack_id = value['null-action']['selected_option']['value']
-            print(slack_id)
+            values.append(value['null-action']['selected_option']['value'])
+    cursor.execute(POSITIONS_SLACK_INSERT, *values)
 
 # Modal Reponse Ack
 @app.action("null-action")
