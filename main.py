@@ -269,6 +269,18 @@ def generate_takedowns(ack, body, client, logger):
         except SlackApiError as e:
                 print(e)
         client.chat_postMessage(channel=channel_id, text=f"Your takedown for the week is {takedown_slot}")
+    response = client.views_update(
+            view_id=view_id,
+            view={
+                "type": "modal",
+                "title": {
+                    "type": "plain_text",
+                    "text": "Modal Closed"
+                },
+                "blocks": []
+            }
+        )
+
 
 if __name__ == '__main__':
     conn = psycopg2.connect(database=os.getenv("PGDATABASE"),
