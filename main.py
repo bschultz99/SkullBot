@@ -16,7 +16,8 @@ from database import (USER_TABLE,
                       TAKEDOWNS_CHANNEL_INSERT,
                       TAKEDOWNS_SELECT_MEMBERS,
                       POSITIONS_SLACK_INSERT,
-                      THETA_THREE_SELECT)
+                      THETA_THREE_SELECT,
+                      ADMIN_CHECK)
 import os, logging, psycopg2
 import pandas as pd
 
@@ -77,9 +78,11 @@ def user_portal(body, ack, client, logger):
 @app.command("/admin-portal")
 def admin_portal(body, ack, client, logger):
     """Admin Portal"""
-    logger.info(body)
-    print(body['user_id'])
     ack()
+    logger.info(body)
+    user_id = body['user_id']
+    cursor.execute(ADMIN_CHECK, (user_id,))
+    print(cursor.fetchone)
     res = client.views_open(trigger_id=body["trigger_id"], view=ADMIN_PORTAL)
     logger.info(res)
 

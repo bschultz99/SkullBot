@@ -169,3 +169,8 @@ VALUES (%s, %s)
 ON CONFLICT (position) DO UPDATE
 SET slack_id = EXCLUDED.slack_id;  
 '''
+
+ADMIN_CHECK = '''
+SELECT count(*) FROM postions
+WHERE slack_id = %s;
+'''
