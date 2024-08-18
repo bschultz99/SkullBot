@@ -202,7 +202,7 @@ FROM cleanups
 WHERE captain = true
 AND used = false
 AND disabled = false
-ORDER BY captain_count, {};
+ORDER BY {}, captain_count;
 '''
 
 
