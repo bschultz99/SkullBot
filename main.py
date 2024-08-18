@@ -92,6 +92,7 @@ def view_submission(ack, body, client, logger):
     cursor.execute(TAKEDOWN_INSERT, (slack_id, *takedowns))
     conn.commit()
     captain = False
+    print(membership)
     if membership == 'IH-2' or membership == 'IH-3':
         captain = True
     cursor.execute(CLEANUPS_INSERT, (slack_id, captain))
