@@ -22,7 +22,8 @@ from database import (USER_TABLE,
                       ADMIN_CHECK,
                       CLEANUPS_WEEKLY,
                       CLEANUPS_INSERT,
-                      CAPTAIN_SELECT)
+                      CAPTAIN_SELECT,
+                      CAPTAIN_UPDATE)
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -306,16 +307,18 @@ def generate_cleanups(ack, body, client, logger):
     conn.commit()
     print("hi")
     cleanups = {
-        'kitchen': 5,
-        'zero_deck': 4,
-        'first_deck': 2,
-        'bathrooms': 2,
-        'stairs_halls_brojo_brolo': 2,
-        'deck_brush': 2
+        'kitchen': 4,
+        'zero_deck': 3,
+        'first_deck': 1,
+        'bathrooms': 1,
+        'stairs_halls_brojo_brolo': 1,
+        'deck_brush': 1
     }
     for cleanup, count in cleanups.items():
         cursor.execute(CAPTAIN_SELECT.format(cleanup))
-        print(cursor.fetchall())
+        person = cursor.fetchone()[0]
+        cursor.execute(CAPTAIN_UPDATE, (cleanup, cleanup, person, cleanup, person))
+        conn.commit()
 
 
 if __name__ == '__main__':

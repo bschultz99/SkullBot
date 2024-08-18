@@ -205,6 +205,17 @@ AND disabled = false
 ORDER BY {}, captain_count;
 '''
 
+CAPTAIN_UPDATE = '''
+UPDATE cleanups
+SET used = true,
+captain_count = captain_count + 1,
+%s = %s + 1
+WHERE slack_id = %s;
+UPDATE cleanups_weekly
+SET captain = true,
+assignment = %s
+WHERE slack_id = %s;
+'''
 
 # ADMIN PORTAL
 
