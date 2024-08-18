@@ -178,6 +178,19 @@ FROM positions
 WHERE position = 'Theta-3';
 '''
 
+#Generate Cleanups
+CLEANUPS_WEEKLY = '''
+DROP TABLE IF EXISTS cleanups_weekly;
+CREATE TABLE IF NOT EXISTS cleanups_weekly (
+    slack_id VARCHAR(255) PRIMARY KEY REFERENCES users(slack_id) ON DELETE CASCADE,
+    captain BOOLEAN DEFAULT False,
+    assignment VARCHAR(255) DEFAULT ''
+);
+INSERT INTO takedowns_weekly (slack_id)
+SELECT slack_id FROM users;
+'''
+
+
 # ADMIN PORTAL
 
 POSITIONS_SLACK_INSERT = '''

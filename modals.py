@@ -226,6 +226,15 @@ ADMIN_PORTAL = {
 					},
 					"value": "add-admin",
 					"action_id": "add-admin"
+				},
+                {
+					"type": "button",
+					"text": {
+						"type": "plain_text",
+						"text": "Generate Cleanups"
+					},
+					"value": "generate-cleanups",
+					"action_id": "generate-cleanups"
 				}
 			]
 		}

@@ -19,7 +19,8 @@ from database import (USER_TABLE,
                       TAKEDOWNS_SELECT_MEMBERS,
                       POSITIONS_SLACK_INSERT,
                       THETA_THREE_SELECT,
-                      ADMIN_CHECK)
+                      ADMIN_CHECK,
+                      CLEANUPS_WEEKLY)
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -281,6 +282,15 @@ def generate_takedowns(ack, body, client, logger):
             }
         )
 
+
+# Execute Cleanup Generation
+@app.action("generate-cleanups")
+def generate_takedowns(ack, body, client, logger):
+    ack()
+    logger.info(body)
+    view_id = body['container']['view_id']
+    cursor.execute(CLEANUPS_WEEKLY)
+    conn.commit()
 
 if __name__ == '__main__':
     conn = psycopg2.connect(database=os.getenv("PGDATABASE"),
