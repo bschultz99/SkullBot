@@ -232,54 +232,6 @@ def display_cleanups(ack, body, client, logger):
         initial_comment="Here is the database for cleanups:",
     )
 
-@app.action("insert-data")
-def insert_data(ack, body, client, logger):
-    ack()
-    users = [('1','1', 'IH2'),
-             ('2','2', 'IH2'),
-             ('3','3', 'IH3'),
-             ('4','4', 'IH2'),
-             ('5','5', 'IH3'),
-             ('6','6', 'IH2'),
-             ('7','7', 'IH3'),
-             ('8','8', 'IH3'),
-             ('9','9', 'IH3'),
-             ('10','10', 'IH3'),
-             ('11','11', 'IH3'),
-             ('12','12', 'NM'),
-             ('13','13', 'NM'),
-             ('14','14', 'TM'),
-             ('15','15', 'TM'),
-             ('16','16', 'NM'),]
-    takedowns = [('1', [True, False, True, False, True, False, True, False, False, False]),
-                 ('2', [False, True, True, True, False, False, False, False, True, True]),
-                 ('3', [True, False, False, False, False, False, False, True, False, False]),
-                 ('4', [False, True, True, True, True, True, False, False, False, False]),
-                 ('5', [True, False, True, False, True, False, True, False, True, False]),
-                 ('6', [False, True, False, True, False, True, False, True, False, True]),
-                 ('7', [True, False, False, False, False, False, False, False, False, False]),
-                 ('8', [False, True, True, True, False, False, False, False, False, False]),
-                 ('9', [False, False, False, False, True, True, True, False, False, False]),
-                 ('10', [False, False, False, False, False, False, True, True, True, True]),
-                 ('11', [True, False, True, False, True, False, False, False, False, True]),
-                 ('12', [False, True, True, False, False, False, False, False, False, False]),
-                 ('13', [False, True, False, True, False, True, False, True, True, True]),
-                 ('14', [True, False, True, False, True, False, True, False, False, False]),
-                 ('15', [False, True, False, False, True, False, False, False, False, False]),
-                 ('16', [False, False, True, False, False, False, True, False, False, False]),
-    ]
-    for user in users:
-        cursor.execute(USER_INSERT, user)
-        conn.commit()
-        captain = False
-        if user[2] == 'IH2' or user[2] == 'IH3':
-            captain = True
-        cursor.execute(CLEANUPS_INSERT, (user[0], captain))
-        conn.commit()
-    for takedown in takedowns:
-        cursor.execute(TAKEDOWN_INSERT, (takedown[0], *takedown[1]))
-        conn.commit()
-
 # Execute Takedown Generation
 @app.action("generate-takedowns")
 def generate_takedowns(ack, body, client, logger):
