@@ -206,8 +206,10 @@ def display_takedowns(ack, body, client, logger):
     df = pd.read_sql_query(TAKEDOWN_DISPLAY, conn)
     df.to_csv('takedown_database.csv', index=False)
     slack_id = body["user"]["id"]
+    res = client.conversations_open(users=slack_id)
+    channel_id = res['channel']['id']
     client.files_upload_v2(
-        channel=slack_id,
+        channel=channel_id,
         file="takedown_database.csv",
         title="Takedowns",
         initial_comment="Here is the database for takedowns:",
