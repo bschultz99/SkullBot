@@ -375,7 +375,7 @@ def generate_cleanups(ack, body, client, logger):
                 "type": "modal",
                 "title": {
                     "type": "plain_text",
-                    "text": "Takedowns Generated"
+                    "text": "Cleanups Generated"
                 },
                 "blocks": []
             }
