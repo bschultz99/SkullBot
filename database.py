@@ -210,11 +210,11 @@ UPDATE cleanups
 SET used = true,
 captain_count = captain_count + 1,
 {} = {} + 1
-WHERE slack_id = {};
+WHERE slack_id = '{}';
 UPDATE cleanups_weekly
 SET captain = true,
 assignment = {}
-WHERE slack_id = {};
+WHERE slack_id = '{}';
 '''
 
 # ADMIN PORTAL
