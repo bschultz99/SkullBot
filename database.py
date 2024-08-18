@@ -24,6 +24,10 @@ CREATE TABLE IF NOT EXISTS takedown_channels (
     takedown_slot VARCHAR(255) PRIMARY KEY,
     channel_id VARCHAR(255)
     );
+CREATE TABLE IF NOT EXISTS cleanup_channels (
+    cleanup VARCHAR(255) PRIMARY KEY,
+    channel_id VARCHAR(255)
+);
 CREATE TABLE IF NOT EXISTS positions (
     position VARCHAR(255) PRIMARY KEY,
     slack_id VARCHAR(255)

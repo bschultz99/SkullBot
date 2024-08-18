@@ -126,7 +126,7 @@ def add_admin(ack, body, client, logger):
     modal = ADD_ADMIN_USER.copy()
     cursor.execute(SELECT_ALL_USERS)
     modal["blocks"][0]["accessory"]["options"] = generate_options((cursor.fetchall()))
-    res = client.views_update(view_id=view_id, view=str(modal))
+    client.views_update(view_id=view_id, view=str(modal))
 
 #Display Remove Users Screen
 @app.action("remove-user")
@@ -137,7 +137,7 @@ def remove_user_action(ack, body, client, logger):
     cursor.execute(SELECT_ALL_USERS)
     modal = REMOVE_USER.copy()
     modal["blocks"][0]["accessory"]["options"] = generate_options((cursor.fetchall()))
-    res = client.views_update(view_id=view_id, view=str(modal))
+    client.views_update(view_id=view_id, view=str(modal))
 
 @app.action("insert-data")
 def insert_data(ack, body, client, logger):
