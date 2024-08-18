@@ -213,7 +213,7 @@ captain_count = captain_count + 1,
 WHERE slack_id = '{}';
 UPDATE cleanups_weekly
 SET captain = true,
-assignment = {}
+assignment = '{}'
 WHERE slack_id = '{}';
 '''
 
