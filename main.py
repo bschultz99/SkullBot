@@ -379,7 +379,7 @@ def generate_cleanups(ack, body, client, logger):
     final_cleanups = itertools.cycle(cleanups.items())
     print(next(final_cleanups))
     cursor.execute(CLEANUPS_REMAINING_COUNT)
-    for _ in range(cursor.fetchone[0]):
+    for _ in range(cursor.fetchone()[0]):
         key, _ = next(final_cleanups)
         cursor.execute(CLEANUPS_SELECT.format(key))
         person = cursor.fetchone()[0]
