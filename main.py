@@ -20,7 +20,8 @@ from database import (USER_TABLE,
                       POSITIONS_SLACK_INSERT,
                       THETA_THREE_SELECT,
                       ADMIN_CHECK,
-                      CLEANUPS_WEEKLY)
+                      CLEANUPS_WEEKLY,
+                      CLEANUPS_INSERT)
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -89,6 +90,11 @@ def view_submission(ack, body, client, logger):
     cursor.execute(USER_INSERT, (slack_id, name, membership))
     conn.commit()
     cursor.execute(TAKEDOWN_INSERT, (slack_id, *takedowns))
+    conn.commit()
+    captain = False
+    if membership == 'IH-2' or membership == 'IH-3':
+        captain = True
+    cursor.execute(CLEANUPS_INSERT, (slack_id, captain))
     conn.commit()
 
 @app.view("admin-portal-modal")
@@ -291,6 +297,16 @@ def generate_takedowns(ack, body, client, logger):
     view_id = body['container']['view_id']
     cursor.execute(CLEANUPS_WEEKLY)
     conn.commit()
+    cleanups = {
+        'kitchen': 5,
+        'zero_deck': 4,
+        'first_deck': 2,
+        'bathrooms': 2,
+        'stairs_halls_brojo_brolo': 2,
+        'deck_brush': 2
+    }
+    for cleanup, count in cleanups.items():
+
 
 if __name__ == '__main__':
     conn = psycopg2.connect(database=os.getenv("PGDATABASE"),

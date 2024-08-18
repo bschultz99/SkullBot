@@ -81,6 +81,12 @@ DO UPDATE SET name = excluded.name,
               membership = excluded.membership;
 '''
 
+CLEANUPS_INSERT = '''
+INSERT INTO cleanups(slack_id, captain)
+ON CONFLICT (slack_id)
+DO UPDATE SET captain = excluded.captain;
+'''
+
 SELECT_ALL_USERS = '''
 SELECT name, slack_id FROM users;
 '''
