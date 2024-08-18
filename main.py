@@ -26,7 +26,8 @@ from database import (USER_TABLE,
                       CAPTAIN_UPDATE,
                       CLEANUPS_RESET,
                       CLEANUPS_SELECT,
-                      CLEANUPS_ASSIGN)
+                      CLEANUPS_ASSIGN,
+                      CLEANUPS_DISPLAY)
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -329,6 +330,14 @@ def generate_cleanups(ack, body, client, logger):
             person = cursor.fetchone()[0]
             cursor.execute(CLEANUPS_ASSIGN.format(cleanup, cleanup, person, cleanup, person ))
             conn.commit()
+    df = pd.read_sql_query(CLEANUPS_DISPLAY, conn)
+    df.to_csv('weekly_cleanups.csv', index=False)
+    client.files_upload_v2(
+        channel="C0684CN6V6U",
+        file="weekly_cleanups.csv",
+        title="Cleanups",
+        initial_comment="Here are the assignments for this weeks cleanups:",
+    )
 
 
 if __name__ == '__main__':
