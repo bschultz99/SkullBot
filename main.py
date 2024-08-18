@@ -28,7 +28,8 @@ from database import (USER_TABLE,
                       CLEANUPS_SELECT,
                       CLEANUPS_ASSIGN,
                       CLEANUPS_DISPLAY,
-                      THETA_ONE_SELECT)
+                      THETA_ONE_SELECT,
+                      CLEANUPS_SELECT_MEMBERS)
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -347,8 +348,39 @@ def generate_cleanups(ack, body, client, logger):
         'deck_brush': 'C07HDTSK52P',
         'stairs_halls_brojo_brolo': 'C07J2QREN3A'
     }
-    cursor.execute(THETA_ONE_SELECT)
-    theta_one = cursor.fetchone()[0]
+    cursor.execute(THETA_THREE_SELECT)
+    theta_three = cursor.fetchone()[0]
+    for cleanup, channel_id in cleanups_channels.items():
+        resp = client.conversations_members(channel = channel_id)
+        for member in resp['members']:
+            if member == 'U067TRDET4Z' or member == 'UCQMZA62E' or member == theta_three:
+                print(member)
+            else:
+                client.conversations_kick(channel= channel_id, user=member)
+        cursor.execute(CLEANUPS_SELECT_MEMBERS, (cleanup,))
+        members = cursor.fetchall()
+        for member in members:
+            try:
+                client.conversations_invite(channel = channel_id, users=member)
+            except SlackApiError as e:
+                print(e)
+        try:
+            client.conversations_invite(channel = channel_id, users=theta_three)
+        except SlackApiError as e:
+                print(e)
+        client.chat_postMessage(channel=channel_id, text=f"Your cleanup for the week is {cleanup}")
+    client.views_update(
+            view_id=view_id,
+            view={
+                "type": "modal",
+                "title": {
+                    "type": "plain_text",
+                    "text": "Takedowns Generated"
+                },
+                "blocks": []
+            }
+        )
+
 
 
 if __name__ == '__main__':

@@ -253,6 +253,14 @@ FROM positions
 WHERE position = 'Theta-3';
 '''
 
+CLEANUPS_SELECT_MEMBERS = '''
+SELECT users.slack_id 
+FROM users
+LEFT JOIN cleanups_weekly
+ON users.slack_id = cleanups_weekly.slack_id
+WHERE cleanups_weekly.assignment = %s;
+'''
+
 # ADMIN PORTAL
 
 POSITIONS_SLACK_INSERT = '''
