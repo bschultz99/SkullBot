@@ -32,6 +32,19 @@ CREATE TABLE IF NOT EXISTS positions (
     position VARCHAR(255) PRIMARY KEY,
     slack_id VARCHAR(255)
     ); 
+CREATE TABLE IF NOT EXISTS cleanups (
+    slack_id VARCHAR(255) PRIMARY KEY REFERENCES users(slack_id) ON DELETE CASCADE,
+    used BOOLEAN DEFAULT FALSE,
+    disabled BOOLEAN DEFAULT FALSE,
+    captain BOOLEAN DEFAULT FALSE,
+    captain_count INTEGER DEFAULT 0,
+    kitchen INTEGER DEFAULT 0,
+    0-deck INTEGER DEFAULT 0,
+    1-deck INTEGER DEFAULT 0,
+    bathrooms INTEGER DEFAULT 0,
+    stairs-halls-brojo-brolo INTEGER DEFAULT 0,
+    deck-brush INTEGER DEFAULT 0
+);
 """
 
 TAKEDOWN_INSERT = '''
