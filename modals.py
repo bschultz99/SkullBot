@@ -235,6 +235,24 @@ ADMIN_PORTAL = {
 					},
 					"value": "generate-cleanups",
 					"action_id": "generate-cleanups"
+				},
+                {
+					"type": "button",
+					"text": {
+						"type": "plain_text",
+						"text": "Enable/Disable Cleanup Member"
+					},
+					"value": "toggle-cleanup",
+					"action_id": "toggle-cleanup"
+				},
+                {
+					"type": "button",
+					"text": {
+						"type": "plain_text",
+						"text": "Enable/Disable Cleanup Captain"
+					},
+					"value": "toggle-captain",
+					"action_id": "toggle-captain"
 				}
 			]
 		}
@@ -258,6 +276,68 @@ REMOVE_USER = {
 			"text": {
 				"type": "mrkdwn",
 				"text": "Please pick a member to remove from the system:"
+			},
+			"accessory": {
+				"type": "static_select",
+				"placeholder": {
+					"type": "plain_text",
+					"text": "Select a user"
+				},
+				"options": [],
+				"action_id": "null-action"
+			}
+		}
+	]
+}
+
+TOGGLE_CAPTAIN = {
+	"title": {
+		"type": "plain_text",
+		"text": "Toggle Cleanup Captain Portal"
+	},
+	"submit": {
+		"type": "plain_text",
+		"text": "Submit"
+	},
+	"type": "modal",
+	"callback_id": "toggle-captain-modal",
+	"blocks": [
+		{
+			"type": "section",
+			"text": {
+				"type": "mrkdwn",
+				"text": "Please pick a member to toggle their captain status for cleanups:"
+			},
+			"accessory": {
+				"type": "static_select",
+				"placeholder": {
+					"type": "plain_text",
+					"text": "Select a user"
+				},
+				"options": [],
+				"action_id": "null-action"
+			}
+		}
+	]
+}
+
+TOGGLE_CLEANUP = {
+	"title": {
+		"type": "plain_text",
+		"text": "Toggle Cleanup Member Portal"
+	},
+	"submit": {
+		"type": "plain_text",
+		"text": "Submit"
+	},
+	"type": "modal",
+	"callback_id": "toggle-cleanup-modal",
+	"blocks": [
+		{
+			"type": "section",
+			"text": {
+				"type": "mrkdwn",
+				"text": "Please pick a member to toggle their cleanup status for cleanups:"
 			},
 			"accessory": {
 				"type": "static_select",

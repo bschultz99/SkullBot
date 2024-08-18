@@ -2,7 +2,7 @@ from slack_bolt import App
 from slack_sdk.errors import SlackApiError
 import os, logging, psycopg2
 import pandas as pd
-from modals import USER_PORTAL, ADMIN_PORTAL, REMOVE_USER, ADD_ADMIN_USER
+from modals import USER_PORTAL, ADMIN_PORTAL, REMOVE_USER, ADD_ADMIN_USER, TOGGLE_CAPTAIN, TOGGLE_CLEANUP
 from database import (USER_TABLE,
                       USER_INSERT,
                       SELECT_ALL_USERS,
@@ -29,7 +29,10 @@ from database import (USER_TABLE,
                       CLEANUPS_ASSIGN,
                       CLEANUPS_DISPLAY,
                       THETA_ONE_SELECT,
-                      CLEANUPS_SELECT_MEMBERS)
+                      CLEANUPS_SELECT_MEMBERS,
+                      CLEANUPS_CAPTAIN_SELECT,
+                      CLEANUPS_CAPTAIN_UPDATE,
+                      CLEANUPS_TOGGLE_UPDATE)
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -129,6 +132,24 @@ def add_admin_modal(ack, body, client, logger):
     cursor.execute(POSITIONS_SLACK_INSERT, values)
     conn.commit()
 
+@app.view("toggle-captain-modal")
+def captain_toggle(ack, body, client, logger):
+    ack()
+    for _, value in body['view']['state']['values'].items():
+        if 'null-action' in value:
+            slack_id = value['null-action']['selected_option']['value']
+    cursor.execute(CLEANUPS_CAPTAIN_UPDATE, (slack_id,))
+    conn.commit()
+
+@app.view("toggle-cleanup-modal")
+def cleanup_toggle(ack, body, client, logger):
+    ack()
+    for _, value in body['view']['state']['values'].items():
+        if 'null-action' in value:
+            slack_id = value['null-action']['selected_option']['value']
+    cursor.execute(CLEANUPS_TOGGLE_UPDATE, (slack_id,))
+    conn.commit()
+
 # Modal Response Ack
 @app.action("null-action")
 def buttons(ack):
@@ -152,6 +173,26 @@ def remove_user_action(ack, body, client, logger):
     view_id = body['container']['view_id']
     cursor.execute(SELECT_ALL_USERS)
     modal = REMOVE_USER.copy()
+    modal["blocks"][0]["accessory"]["options"] = generate_options((cursor.fetchall()))
+    client.views_update(view_id=view_id, view=str(modal))
+
+@app.action("toggle-captain")
+def toggle_captain(ack, body, client, logger):
+    ack()
+    logger.info(body)
+    view_id = body['container']['view_id']
+    cursor.execute(CLEANUPS_CAPTAIN_SELECT)
+    modal = TOGGLE_CAPTAIN.copy()
+    modal["blocks"][0]["accessory"]["options"] = generate_options((cursor.fetchall()))
+    client.views_update(view_id=view_id, view=str(modal))
+
+@app.action("toggle-cleanup")
+def toggle_cleanup(ack, body, client, logger):
+    ack()
+    logger.info(body)
+    view_id = body['container']['view_id']
+    cursor.execute(CLEANUPS_CAPTAIN_SELECT)
+    modal = TOGGLE_CLEANUP.copy()
     modal["blocks"][0]["accessory"]["options"] = generate_options((cursor.fetchall()))
     client.views_update(view_id=view_id, view=str(modal))
 

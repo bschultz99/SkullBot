@@ -261,6 +261,25 @@ ON users.slack_id = cleanups_weekly.slack_id
 WHERE cleanups_weekly.assignment = %s;
 '''
 
+#Toggle
+CLEANUPS_CAPTAIN_SELECT = '''
+SELECT name, slack_id
+FROM users
+LEFT JOIN cleanups
+on users.slack_id = cleanups.slack_id;
+'''
+CLEANUPS_CAPTAIN_UPDATE = '''
+UPDATE cleanups
+SET captain = NOT captain
+WHERE slack_id = %s;
+'''
+
+CLEANUPS_TOGGLE_UPDATE = '''
+UPDATE cleanups
+SET disabled = NOT disabled
+WHERE slack_id = %s;
+'''
+
 # ADMIN PORTAL
 
 POSITIONS_SLACK_INSERT = '''
