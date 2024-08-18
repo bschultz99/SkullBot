@@ -34,7 +34,8 @@ from database import (USER_TABLE,
                       CLEANUPS_CAPTAIN_SELECT,
                       CLEANUPS_CAPTAIN_UPDATE,
                       CLEANUPS_TOGGLE_UPDATE,
-                      CLEANUPS_REMAINING_COUNT)
+                      CLEANUPS_REMAINING_COUNT,
+                      CLEANUP_DATABASE)
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -213,6 +214,22 @@ def display_takedowns(ack, body, client, logger):
         file="takedown_database.csv",
         title="Takedowns",
         initial_comment="Here is the database for takedowns:",
+    )
+
+@app.action("display-cleanups")
+def display_cleanups(ack, body, client, logger):
+    ack()
+    logger.info(body)
+    df = pd.read_sql_query(CLEANUP_DATABASE, conn)
+    df.to_csv('cleanup_database.csv', index=False)
+    slack_id = body["user"]["id"]
+    res = client.conversations_open(users=slack_id)
+    channel_id = res['channel']['id']
+    client.files_upload_v2(
+        channel=channel_id,
+        file="cleanup_database.csv",
+        title="Cleanups",
+        initial_comment="Here is the database for cleanups:",
     )
 
 @app.action("insert-data")

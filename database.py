@@ -315,3 +315,10 @@ FROM users
 LEFT JOIN takedowns
 on users.slack_id = takedowns.slack_id;
 '''
+
+CLEANUP_DATABASE = '''
+SELECT users.name, cleanups.*
+FROM users
+LEFT JOIN cleanups
+on users.slack_id = cleanups.slack_id;
+'''
