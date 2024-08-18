@@ -209,12 +209,12 @@ CAPTAIN_UPDATE = '''
 UPDATE cleanups
 SET used = true,
 captain_count = captain_count + 1,
-%s = %s + 1
-WHERE slack_id = %s;
+{} = {} + 1
+WHERE slack_id = {};
 UPDATE cleanups_weekly
 SET captain = true,
-assignment = %s
-WHERE slack_id = %s;
+assignment = {}
+WHERE slack_id = {};
 '''
 
 # ADMIN PORTAL
