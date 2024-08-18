@@ -244,7 +244,13 @@ SELECT users.name, cleanups_weekly.captain, cleanups_weekly.assignment
 FROM cleanups_weekly
 INNER JOIN users
 ON users.slack_id = cleanups_weekly.slack_id
-ORDER BY assignment, captain;
+ORDER BY assignment, captain ASC;
+'''
+
+THETA_ONE_SELECT = '''
+SELECT slack_id
+FROM positions
+WHERE position = 'Theta-1';
 '''
 
 # ADMIN PORTAL

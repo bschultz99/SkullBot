@@ -27,7 +27,8 @@ from database import (USER_TABLE,
                       CLEANUPS_RESET,
                       CLEANUPS_SELECT,
                       CLEANUPS_ASSIGN,
-                      CLEANUPS_DISPLAY)
+                      CLEANUPS_DISPLAY,
+                      THETA_ONE_SELECT)
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -338,6 +339,16 @@ def generate_cleanups(ack, body, client, logger):
         title="Cleanups",
         initial_comment="Here are the assignments for this weeks cleanups:",
     )
+    cleanups_channels = {
+        'kitchen': 'C07HGFT23DJ',
+        'bathrooms': 'C07HE18GU3C',
+        'zero_deck': 'C07HGFTFLA0',
+        'first_deck': 'C07HE17525Q',
+        'deck_brush': 'C07HDTSK52P',
+        'stairs_halls_brojo_brolo': 'C07J2QREN3A'
+    }
+    cursor.execute(THETA_ONE_SELECT)
+    theta_one = cursor.fetchone()[0]
 
 
 if __name__ == '__main__':
