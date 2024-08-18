@@ -293,7 +293,7 @@ REMOVE_USER = {
 TOGGLE_CAPTAIN = {
 	"title": {
 		"type": "plain_text",
-		"text": "Toggle Cleanup Captain Portal"
+		"text": "Toggle Cleanup Captain"
 	},
 	"submit": {
 		"type": "plain_text",
@@ -324,7 +324,7 @@ TOGGLE_CAPTAIN = {
 TOGGLE_CLEANUP = {
 	"title": {
 		"type": "plain_text",
-		"text": "Toggle Cleanup Member Portal"
+		"text": "Toggle Cleanup Member"
 	},
 	"submit": {
 		"type": "plain_text",
