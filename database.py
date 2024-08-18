@@ -193,7 +193,7 @@ CREATE TABLE IF NOT EXISTS cleanups_weekly (
     captain BOOLEAN DEFAULT False,
     assignment VARCHAR(255) DEFAULT ''
 );
-INSERT INTO takedowns_weekly (slack_id)
+INSERT INTO cleanups_weekly (slack_id)
 SELECT slack_id FROM users;
 '''
 CAPTAIN_SELECT = '''
