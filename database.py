@@ -39,11 +39,11 @@ CREATE TABLE IF NOT EXISTS cleanups (
     captain BOOLEAN DEFAULT FALSE,
     captain_count INTEGER DEFAULT 0,
     kitchen INTEGER DEFAULT 0,
-    0-deck INTEGER DEFAULT 0,
-    1-deck INTEGER DEFAULT 0,
+    zero_deck INTEGER DEFAULT 0,
+    first_deck INTEGER DEFAULT 0,
     bathrooms INTEGER DEFAULT 0,
-    stairs-halls-brojo-brolo INTEGER DEFAULT 0,
-    deck-brush INTEGER DEFAULT 0
+    stairs_halls_brojo_brolo INTEGER DEFAULT 0,
+    deck_brush INTEGER DEFAULT 0
 );
 """
 
