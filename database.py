@@ -83,6 +83,7 @@ DO UPDATE SET name = excluded.name,
 
 CLEANUPS_INSERT = '''
 INSERT INTO cleanups(slack_id, captain)
+VALUES (%s, %s)
 ON CONFLICT (slack_id)
 DO UPDATE SET captain = excluded.captain;
 '''
