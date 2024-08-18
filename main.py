@@ -328,6 +328,7 @@ def generate_cleanups(ack, body, client, logger):
             cursor.execute(CLEANUPS_SELECT.format(cleanup))
             person = cursor.fetchone()[0]
             cursor.execute(CLEANUPS_ASSIGN.format(cleanup, cleanup, person, cleanup, person ))
+            conn.commit()
 
 
 if __name__ == '__main__':
