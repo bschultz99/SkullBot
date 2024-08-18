@@ -320,7 +320,7 @@ def generate_cleanups(ack, body, client, logger):
         cursor.execute(CAPTAIN_UPDATE.format(cleanup, cleanup, person, cleanup, person))
         conn.commit()
     for cleanup, count in cleanups.items():
-        for x in count:
+        for x in range(count):
             print(x)
 
 
