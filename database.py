@@ -218,7 +218,7 @@ WHERE slack_id = '{}';
 '''
 CLEANUPS_ASSIGN = '''
 UPDATE cleanups
-SET used = true
+SET used = true,
 {} = {} + 1
 WHERE slack_id = '{}';
 UPDATE cleanups_weekly
