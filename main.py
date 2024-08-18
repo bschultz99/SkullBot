@@ -298,12 +298,13 @@ def generate_takedowns(ack, body, client, logger):
 
 # Execute Cleanup Generation
 @app.action("generate-cleanups")
-def generate_takedowns(ack, body, client, logger):
+def generate_cleanups(ack, body, client, logger):
     ack()
     logger.info(body)
     view_id = body['container']['view_id']
     cursor.execute(CLEANUPS_WEEKLY)
     conn.commit()
+    print("hi")
     cleanups = {
         'kitchen': 5,
         'zero_deck': 4,
