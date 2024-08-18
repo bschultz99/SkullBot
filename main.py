@@ -199,6 +199,20 @@ def toggle_cleanup(ack, body, client, logger):
     modal["blocks"][0]["accessory"]["options"] = generate_options((cursor.fetchall()))
     client.views_update(view_id=view_id, view=str(modal))
 
+@app.action("display-takedowns")
+def display_takedowns(ack, body, client, logger):
+    ack()
+    logger.info(body)
+    df = pd.read_sql_query(TAKEDOWN_DISPLAY, conn)
+    df.to_csv('takedown_database.csv', index=False)
+    slack_id = body["user"]["id"]
+    client.files_upload_v2(
+        channel=slack_id,
+        file="takedown_database.csv",
+        title="Takedowns",
+        initial_comment="Here is the database for takedowns:",
+    )
+
 @app.action("insert-data")
 def insert_data(ack, body, client, logger):
     ack()

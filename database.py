@@ -307,3 +307,11 @@ ADMIN_CHECK = '''
 SELECT count(*) FROM positions
 WHERE slack_id = %s;
 '''
+
+# Display Takedowns
+TAKEDOWN_DATABASE = '''
+SELECT users.name, takedowns.*
+FROM users
+LEFT JOIN takedowns
+on users.slack_id = takedowns.slack_id;
+'''
