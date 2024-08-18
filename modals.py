@@ -306,7 +306,7 @@ TOGGLE_CAPTAIN = {
 			"type": "section",
 			"text": {
 				"type": "mrkdwn",
-				"text": "Please pick a member to toggle their captain status for cleanups:"
+				"text": "Please pick a member:"
 			},
 			"accessory": {
 				"type": "static_select",
@@ -337,7 +337,7 @@ TOGGLE_CLEANUP = {
 			"type": "section",
 			"text": {
 				"type": "mrkdwn",
-				"text": "Please pick a member to toggle their cleanup status for cleanups:"
+				"text": "Please pick a member:"
 			},
 			"accessory": {
 				"type": "static_select",
