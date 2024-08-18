@@ -316,7 +316,7 @@ def generate_cleanups(ack, body, client, logger):
     }
     for cleanup, count in cleanups.items():
         cursor.execute(CAPTAIN_SELECT.format(cleanup))
-        person = cursor.fetchone()[0]
+        person = str(cursor.fetchone()[0])
         cursor.execute(CAPTAIN_UPDATE.format(cleanup, cleanup, person, cleanup, person))
         conn.commit()
 
