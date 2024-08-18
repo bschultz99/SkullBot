@@ -161,6 +161,29 @@ USER_PORTAL = {
 				"type": "plain_text",
 				"text": "Takedown Availability"
 			}
+		},
+        {
+			"type": "actions",
+			"elements": [
+				{
+					"type": "button",
+					"text": {
+						"type": "plain_text",
+						"text": "Display Takedowns"
+					},
+					"value": "display-takedowns",
+					"action_id": "display-takedowns"
+				},
+                {
+					"type": "button",
+					"text": {
+						"type": "plain_text",
+						"text": "Display Cleanups"
+					},
+					"value": "display-cleanups",
+					"action_id": "display-cleanups"
+				}
+			]
 		}
 	]
 }
