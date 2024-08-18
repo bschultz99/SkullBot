@@ -261,9 +261,23 @@ ON users.slack_id = cleanups_weekly.slack_id
 WHERE cleanups_weekly.assignment = %s;
 '''
 
+CLEANUPS_REMAINING_COUNT = '''
+SELECT COUNT(*) FROM cleanups
+WHERE used = false,
+AND disabled = false;
+'''
+
+CLEANUPS_REMAINING = '''
+SELECT slack_id
+FROM cleanups
+WHERE used = false
+AND disabled = false;
+ORDER BY {};
+'''
+
 #Toggle
 CLEANUPS_CAPTAIN_SELECT = '''
-SELECT name, slack_id
+SELECT users.name, users.slack_id
 FROM users
 LEFT JOIN cleanups
 on users.slack_id = cleanups.slack_id;

@@ -1,6 +1,7 @@
 from slack_bolt import App
 from slack_sdk.errors import SlackApiError
 import os, logging, psycopg2
+import itertools
 import pandas as pd
 from modals import USER_PORTAL, ADMIN_PORTAL, REMOVE_USER, ADD_ADMIN_USER, TOGGLE_CAPTAIN, TOGGLE_CLEANUP
 from database import (USER_TABLE,
@@ -32,7 +33,8 @@ from database import (USER_TABLE,
                       CLEANUPS_SELECT_MEMBERS,
                       CLEANUPS_CAPTAIN_SELECT,
                       CLEANUPS_CAPTAIN_UPDATE,
-                      CLEANUPS_TOGGLE_UPDATE)
+                      CLEANUPS_TOGGLE_UPDATE,
+                      CLEANUPS_REMAINING_COUNT)
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -373,6 +375,17 @@ def generate_cleanups(ack, body, client, logger):
             person = cursor.fetchone()[0]
             cursor.execute(CLEANUPS_ASSIGN.format(cleanup, cleanup, person, cleanup, person ))
             conn.commit()
+    final_cleanups = itertools.cycle(cleanup.items())
+    print(next(final_cleanups))
+    cursor.execute(CLEANUPS_REMAINING_COUNT)
+    for _ in range(cursor.fetchone[0]):
+        key, _ = next(final_cleanups)
+        cursor.execute(CLEANUPS_SELECT.format(key))
+        person = cursor.fetchone()[0]
+        cursor.execute(CLEANUPS_ASSIGN.format(key, key, person, key, person ))
+        conn.commit()
+
+
     df = pd.read_sql_query(CLEANUPS_DISPLAY, conn)
     df.to_csv('weekly_cleanups.csv', index=False)
     client.files_upload_v2(
