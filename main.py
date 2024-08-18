@@ -289,8 +289,6 @@ if __name__ == '__main__':
                             password=os.getenv("POSTGRES_PASSWORD"),
                             port=os.getenv("PGPORT"))
     cursor = conn.cursor()
-    cursor.execute('DROP TABLE cleanups;')
-    conn.commit()
     cursor.execute(USER_TABLE)
     conn.commit()
     app.start(3000)
