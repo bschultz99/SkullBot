@@ -23,7 +23,8 @@ from database import (USER_TABLE,
                       CLEANUPS_WEEKLY,
                       CLEANUPS_INSERT,
                       CAPTAIN_SELECT,
-                      CAPTAIN_UPDATE)
+                      CAPTAIN_UPDATE,
+                      CLEANUPS_RESET)
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -306,6 +307,8 @@ def generate_cleanups(ack, body, client, logger):
     cursor.execute(CLEANUPS_WEEKLY)
     conn.commit()
     print("hi")
+    cursor.execute(CLEANUPS_RESET)
+    conn.commit()
     cleanups = {
         'kitchen': 4,
         'zero_deck': 3,

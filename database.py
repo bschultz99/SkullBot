@@ -217,6 +217,11 @@ assignment = '{}'
 WHERE slack_id = '{}';
 '''
 
+CLEANUPS_RESET = '''
+UPDATE cleanups
+SET used = false;
+'''
+
 # ADMIN PORTAL
 
 POSITIONS_SLACK_INSERT = '''
