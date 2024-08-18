@@ -196,6 +196,14 @@ CREATE TABLE IF NOT EXISTS cleanups_weekly (
 INSERT INTO takedowns_weekly (slack_id)
 SELECT slack_id FROM users;
 '''
+CAPTAIN_SELECT = '''
+SELECT slack_id
+FROM cleanups
+WHERE captain = true
+AND used = false
+AND disabled = false
+ORDER BY captain_count, {};
+'''
 
 
 # ADMIN PORTAL

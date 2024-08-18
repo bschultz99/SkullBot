@@ -21,7 +21,8 @@ from database import (USER_TABLE,
                       THETA_THREE_SELECT,
                       ADMIN_CHECK,
                       CLEANUPS_WEEKLY,
-                      CLEANUPS_INSERT)
+                      CLEANUPS_INSERT,
+                      CAPTAIN_SELECT)
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -311,7 +312,9 @@ def generate_takedowns(ack, body, client, logger):
         'stairs_halls_brojo_brolo': 2,
         'deck_brush': 2
     }
-    #for cleanup, count in cleanups.items():
+    for cleanup, count in cleanups.items():
+        cursor.execute(CAPTAIN_SELECT.format(cleanup))
+        print(cursor.fetchall())
 
 
 if __name__ == '__main__':
