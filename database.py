@@ -179,10 +179,10 @@ ON users.slack_id = takedowns_weekly.slack_id
 WHERE takedowns_weekly.assignment LIKE %s;
 '''
 
-THETA_THREE_SELECT = '''
+THETA_ONE_SELECT = '''
 SELECT slack_id
 FROM positions
-WHERE position = 'Theta-3';
+WHERE position = 'Theta-1';
 '''
 
 #Generate Cleanups
@@ -247,10 +247,10 @@ ON users.slack_id = cleanups_weekly.slack_id
 ORDER BY assignment, captain ASC;
 '''
 
-THETA_ONE_SELECT = '''
+THETA_THREE_SELECT = '''
 SELECT slack_id
 FROM positions
-WHERE position = 'Theta-1';
+WHERE position = 'Theta-3';
 '''
 
 # ADMIN PORTAL

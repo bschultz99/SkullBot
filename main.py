@@ -266,14 +266,14 @@ def generate_takedowns(ack, body, client, logger):
         'friday_lunch': 'C05PG5PPS2C',
         'friday_dinner': 'C05NSBGBHT5' 
     }
-    cursor.execute(THETA_THREE_SELECT)
-    theta_three = cursor.fetchone()[0]
+    cursor.execute(THETA_ONE_SELECT)
+    theta_one = cursor.fetchone()[0]
     for takedown_slot, channel_id in takedown_channels.items():
         cursor.execute(TAKEDOWNS_CHANNEL_INSERT, (takedown_slot, channel_id))
         conn.commit()
         resp = client.conversations_members(channel = channel_id)
         for member in resp['members']:
-            if member == 'U067TRDET4Z' or member == 'UCQMZA62E' or member == theta_three:
+            if member == 'U067TRDET4Z' or member == 'UCQMZA62E' or member == theta_one:
                 print(member)
             else:
                 client.conversations_kick(channel= channel_id, user=member)
@@ -285,7 +285,7 @@ def generate_takedowns(ack, body, client, logger):
             except SlackApiError as e:
                 print(e)
         try:
-            client.conversations_invite(channel = channel_id, users=theta_three)
+            client.conversations_invite(channel = channel_id, users=theta_one)
         except SlackApiError as e:
                 print(e)
         client.chat_postMessage(channel=channel_id, text=f"Your takedown for the week is {takedown_slot}")
