@@ -314,11 +314,14 @@ def generate_cleanups(ack, body, client, logger):
         'stairs_halls_brojo_brolo': 1,
         'deck_brush': 1
     }
-    for cleanup, count in cleanups.items():
+    for cleanup, _ in cleanups.items():
         cursor.execute(CAPTAIN_SELECT.format(cleanup))
         person = cursor.fetchone()[0]
         cursor.execute(CAPTAIN_UPDATE.format(cleanup, cleanup, person, cleanup, person))
         conn.commit()
+    for cleanup, count in cleanups.items():
+        for x in count:
+            print(x)
 
 
 if __name__ == '__main__':
