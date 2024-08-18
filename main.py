@@ -186,6 +186,7 @@ def toggle_captain(ack, body, client, logger):
     cursor.execute(CLEANUPS_CAPTAIN_SELECT)
     modal = TOGGLE_CAPTAIN.copy()
     modal["blocks"][0]["accessory"]["options"] = generate_options((cursor.fetchall()))
+    print(modal)
     client.views_update(view_id=view_id, view=str(modal))
 
 @app.action("toggle-cleanup")
