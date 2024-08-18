@@ -185,6 +185,11 @@ def insert_data(ack, body, client, logger):
     for user in users:
         cursor.execute(USER_INSERT, user)
         conn.commit()
+        captain = False
+        if user[2] == 'IH-2' or user[2] == 'IH-3':
+            captain = True
+        cursor.execute(CLEANUPS_INSERT, (user[0], captain))
+        conn.commit()
     for takedown in takedowns:
         cursor.execute(TAKEDOWN_INSERT, (takedown[0], *takedown[1]))
         conn.commit()
@@ -305,7 +310,7 @@ def generate_takedowns(ack, body, client, logger):
         'stairs_halls_brojo_brolo': 2,
         'deck_brush': 2
     }
-    for cleanup, count in cleanups.items():
+    #for cleanup, count in cleanups.items():
 
 
 if __name__ == '__main__':
