@@ -263,7 +263,7 @@ WHERE cleanups_weekly.assignment = %s;
 
 CLEANUPS_REMAINING_COUNT = '''
 SELECT COUNT(*) FROM cleanups
-WHERE used = false,
+WHERE used = false
 AND disabled = false;
 '''
 
