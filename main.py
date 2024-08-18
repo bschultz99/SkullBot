@@ -93,7 +93,7 @@ def view_submission(ack, body, client, logger):
     conn.commit()
     captain = False
     print(membership)
-    if membership == 'IH-2' or membership == 'IH-3':
+    if membership == 'IH2' or membership == 'IH3':
         captain = True
     cursor.execute(CLEANUPS_INSERT, (slack_id, captain))
     conn.commit()
@@ -150,17 +150,17 @@ def remove_user_action(ack, body, client, logger):
 @app.action("insert-data")
 def insert_data(ack, body, client, logger):
     ack()
-    users = [('1','1', 'IH-2'),
-             ('2','2', 'IH-2'),
-             ('3','3', 'IH-3'),
-             ('4','4', 'IH-2'),
-             ('5','5', 'IH-3'),
-             ('6','6', 'IH-2'),
-             ('7','7', 'IH-3'),
-             ('8','8', 'IH-3'),
-             ('9','9', 'IH-3'),
-             ('10','10', 'IH-3'),
-             ('11','11', 'IH-3'),
+    users = [('1','1', 'IH2'),
+             ('2','2', 'IH2'),
+             ('3','3', 'IH3'),
+             ('4','4', 'IH2'),
+             ('5','5', 'IH3'),
+             ('6','6', 'IH2'),
+             ('7','7', 'IH3'),
+             ('8','8', 'IH3'),
+             ('9','9', 'IH3'),
+             ('10','10', 'IH3'),
+             ('11','11', 'IH3'),
              ('12','12', 'NM'),
              ('13','13', 'NM'),
              ('14','14', 'TM'),
@@ -187,7 +187,7 @@ def insert_data(ack, body, client, logger):
         cursor.execute(USER_INSERT, user)
         conn.commit()
         captain = False
-        if user[2] == 'IH-2' or user[2] == 'IH-3':
+        if user[2] == 'IH2' or user[2] == 'IH3':
             captain = True
         cursor.execute(CLEANUPS_INSERT, (user[0], captain))
         conn.commit()
