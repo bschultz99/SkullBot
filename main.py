@@ -24,7 +24,9 @@ from database import (USER_TABLE,
                       CLEANUPS_INSERT,
                       CAPTAIN_SELECT,
                       CAPTAIN_UPDATE,
-                      CLEANUPS_RESET)
+                      CLEANUPS_RESET,
+                      CLEANUPS_SELECT,
+                      CLEANUPS_ASSIGN)
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -306,7 +308,6 @@ def generate_cleanups(ack, body, client, logger):
     view_id = body['container']['view_id']
     cursor.execute(CLEANUPS_WEEKLY)
     conn.commit()
-    print("hi")
     cursor.execute(CLEANUPS_RESET)
     conn.commit()
     cleanups = {
@@ -323,8 +324,10 @@ def generate_cleanups(ack, body, client, logger):
         cursor.execute(CAPTAIN_UPDATE.format(cleanup, cleanup, person, cleanup, person))
         conn.commit()
     for cleanup, count in cleanups.items():
-        for x in range(count):
-            print(x)
+        for _ in range(count):
+            cursor.execute(CLEANUPS_SELECT.format(cleanup))
+            person = cursor.fetchone()[0]
+            cursor.execute(CLEANUPS_ASSIGN.format(cleanup, cleanup, person, cleanup, person ))
 
 
 if __name__ == '__main__':

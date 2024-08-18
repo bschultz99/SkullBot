@@ -216,6 +216,23 @@ SET captain = true,
 assignment = '{}'
 WHERE slack_id = '{}';
 '''
+CLEANUPS_ASSIGN = '''
+UPDATE cleanups
+SET used = true
+{} = {} + 1
+WHERE slack_id = '{}';
+UPDATE cleanups_weekly
+SET assignment = '{}'
+WHERE slack_id = '{}';
+'''
+
+CLEANUPS_SELECT = '''
+SELECT slack_id
+FROM cleanups
+WHERE used = false
+AND disabled = false
+ORDER BY {};
+'''
 
 CLEANUPS_RESET = '''
 UPDATE cleanups
