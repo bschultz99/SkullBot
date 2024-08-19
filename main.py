@@ -279,7 +279,7 @@ def generate_takedowns(ack, body, client, logger):
     df = pd.read_sql_query(TAKEDOWN_DISPLAY, conn)
     df.to_csv('weekly_takedowns.csv', index=False)
     client.files_upload_v2(
-        channel="C0684CN6V6U",
+        channel="CCUG1BGRH",
         file="weekly_takedowns.csv",
         title="Takedowns",
         initial_comment="Here are the assignments for this weeks takedowns:",
@@ -374,7 +374,7 @@ def generate_cleanups(ack, body, client, logger):
     df = pd.read_sql_query(CLEANUPS_DISPLAY, conn)
     df.to_csv('weekly_cleanups.csv', index=False)
     client.files_upload_v2(
-        channel="C0684CN6V6U",
+        channel="CCVKLMJUX",
         file="weekly_cleanups.csv",
         title="Cleanups",
         initial_comment="Here are the assignments for this weeks cleanups:",

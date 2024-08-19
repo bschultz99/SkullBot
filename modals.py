@@ -227,20 +227,21 @@ ADMIN_PORTAL = {
 					"type": "button",
 					"text": {
 						"type": "plain_text",
-						"text": "Generate Takedowns"
-					},
-					"value": "generate-takedowns",
-					"action_id": "generate-takedowns"
-				},
-                {
-					"type": "button",
-					"text": {
-						"type": "plain_text",
 						"text": "Add admin"
 					},
 					"value": "add-admin",
 					"action_id": "add-admin"
 				},
+                {
+					"type": "button",
+					"text": {
+						"type": "plain_text",
+						"text": "Generate Takedowns"
+					},
+					"value": "generate-takedowns",
+					"action_id": "generate-takedowns"
+				},
+                
                 {
 					"type": "button",
 					"text": {
