@@ -35,7 +35,8 @@ from database import (USER_TABLE,
                       CLEANUPS_CAPTAIN_UPDATE,
                       CLEANUPS_TOGGLE_UPDATE,
                       CLEANUPS_REMAINING_COUNT,
-                      CLEANUP_DATABASE)
+                      CLEANUP_DATABASE,
+                      TAKEDOWN_DATABASE)
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -204,7 +205,7 @@ def toggle_cleanup(ack, body, client, logger):
 def display_takedowns(ack, body, client, logger):
     ack()
     logger.info(body)
-    df = pd.read_sql_query(TAKEDOWN_DISPLAY, conn)
+    df = pd.read_sql_query(TAKEDOWN_DATABASE, conn)
     df.to_csv('takedown_database.csv', index=False)
     slack_id = body["user"]["id"]
     res = client.conversations_open(users=slack_id)
