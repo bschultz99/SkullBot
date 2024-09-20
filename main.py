@@ -244,7 +244,7 @@ def generate_takedowns(ack, body, client, logger):
     cursor.execute(TAKEDOWN_MEMBER_COUNT)
     number_of_members = cursor.fetchone()[0]
     takedown_count = 0
-    if number_of_members >= 11:
+    if number_of_members >= 11 and number_of_members < 21:
         takedown_count = 1
     elif number_of_members >= 21:
         takedown_count = 2
